@@ -10,4 +10,9 @@
     {% endif %}
     <input type = "submit" value="Login">
   </form>
+  <ul>
+      <li><a href = "{% url 'accounts:social:begin' 'facebook' %}">Login with Facebook</a></li>
+      <li><a href = "{% url 'accounts:social:begin' 'google-oauth2' %}">Login with Google</a></li>
+  </ul>
+
 {% endblock %}

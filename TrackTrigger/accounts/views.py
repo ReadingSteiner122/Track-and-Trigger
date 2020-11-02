@@ -20,12 +20,15 @@ def login_view(request):
         form = AuthenticationForm(request.POST)
         if form.is_valid():
             login(request, user)
-            return redirect('main:home')
+            return redirect('home')
     else:
         form = AuthenticationForm()
     return render(request, 'accounts/login.html', {'form':form})
 
-def signout_view(request):
+def logout_view(request):
     if request.method == 'POST':
         logout(request)
-    return redirect('main:home')
+    return redirect('home')
+
+def profile_view(request):
+    return redirect('home')
