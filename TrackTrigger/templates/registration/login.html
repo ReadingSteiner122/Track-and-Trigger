@@ -2,7 +2,7 @@
 
 {% block content %}
   <h1>login</h1>
-  <form class="site-form" action="{% url 'accounts:login' %}"" method="post">
+  <form class="site-form" action="{% url 'login' %}"" method="post">
     {% csrf_token %}
     {{ form }}
     {% if request.GET.next %}
@@ -13,6 +13,7 @@
   <ul>
       <li><a href = "{% url 'accounts:social:begin' 'facebook' %}">Login with Facebook</a></li>
       <li><a href = "{% url 'accounts:social:begin' 'google-oauth2' %}">Login with Google</a></li>
+      <li><a href = "{% url 'password_reset' %}">Forgot Password</a></li>
   </ul>
 
 {% endblock %}
