@@ -1,4 +1,4 @@
-import { BrowserRouter } from "react-router-dom";
+import { BrowserRouter as Router} from "react-router-dom";
 import { Link,Route,Switch } from 'react-router-dom';
 import './App.css';
 import Dashboard from "./InsideApp/Dashboard";
@@ -8,6 +8,7 @@ import Login from './OutsideApp/Login/Login'
 
 function App() {
   return (
+    <Router>
     <div className="App">
       {/* <Login/> */}
       <Route exact path="/login"><Login /></Route>  
@@ -15,6 +16,7 @@ function App() {
       <Route exact path="/forgot2"><Form2 /></Route> 
       <Route exact path="/"><Dashboard /></Route>
     </div>
+    </Router>
   );
 }
 
