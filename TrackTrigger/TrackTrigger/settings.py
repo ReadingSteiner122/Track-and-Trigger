@@ -64,7 +64,7 @@ AUTHENTICATION_BACKENDS = [
 
 AUTH_USER_MODEL = 'accounts.Profile'
 
-ROOT_URLCONF = 'TrackTrigger3.urls'
+ROOT_URLCONF = 'TrackTrigger.urls'
 
 TEMPLATES = [
     {
