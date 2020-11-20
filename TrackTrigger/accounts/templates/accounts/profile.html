@@ -1,0 +1,32 @@
+{% extends 'base_layout.html' %}
+
+{% block content %}
+
+  <h1>Profile</h1>
+  <form  method="post">
+    {% csrf_token %}
+    {% for field in profile_form %}
+      <p>
+          {{ field.label_tag }}
+          {{ field }}
+
+      </p>
+    {% endfor %}
+    {% for field in profile_form %}
+      {% for error in profile_form.errors %}
+        <p style="color: red;">{{ error }}</p>
+        {% endfor %}
+    {% endfor %}
+
+
+    {% if profile_form.non_field_errors %}
+      <div style="color:red;">
+        <p>{{profile_form.non_field_errors}}</p>
+      </div>
+    {% endif %}
+    <input type = "submit" value="Save">
+  </form>
+  <div class="d-flex flex-column">
+    <a class="m-auto" href="{% url 'password_change' %}">Change Password</a>
+  </div>
+{% endblock %}
