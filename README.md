@@ -5,6 +5,8 @@
  1. Django (pip install django)
  2. social-auth-app-django (pip install social-auth-app-django)
  3. Some Bootstrap css files
+ 4. Django Rest Framework (pip install djangorestframework)
+ 5. Markdown (pip install markdown)
  That's about it.
  # How to Run
  If you want to run the app on your localhost server, run the command python manage.py runserver within the TrackTrigger directory.  
