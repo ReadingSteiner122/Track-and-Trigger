@@ -1,0 +1,32 @@
+{% extends 'base_layout.html' %}
+
+{% block title %} Add Entry {% endblock %}
+
+{% block body %}
+<div class="container">
+    <ul class = "messages">
+        {% for msg in messages %}
+            <li>
+
+                    <div class="alert alert-{{msg.level_tag}}" role = "alert">
+
+                            {{msg.message}}
+
+                    </div>
+
+            </li>
+        {% endfor %}
+    </ul>
+    <h1>Diary Model Form</h1>
+
+    <form action="{% url 'adddiarymodelform' %}" method="post">
+
+        {% csrf_token %}
+
+{{diarymodelform.as_p}}
+<input type="submit" class="btn btn-success" value="Log Entry"/>
+
+</form>
+
+</div>
+{% endblock %}

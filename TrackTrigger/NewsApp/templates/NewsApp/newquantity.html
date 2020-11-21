@@ -1,0 +1,20 @@
+{% extends 'base_layout.html' %}
+
+{% block title %} Edit Quantity {% endblock %}
+
+{% block body %}
+<div class="container">
+
+    <h1>Edit Inventory Object</h1>
+
+    <form action="{% url 'editquantity' %}" method="post">
+
+        {% csrf_token %}
+
+{{f.as_p}}
+<input type="submit" class="btn btn-success" value="Edit object"/>
+
+</form>
+
+</div>
+{% endblock %}

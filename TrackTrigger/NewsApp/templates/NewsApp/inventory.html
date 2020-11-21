@@ -1,0 +1,22 @@
+{% extends 'base_layout.html' %}
+
+{% block title %} Inventory {% endblock %}
+
+{% block body %}
+<h1>this is the inventory page</h1>
+<ul>
+    <li><a href="{% url 'inventorymodelform' %}">Click here to add a new object</a></li>
+</ul>
+<ul>
+    <li><a href="{% url 'newquantity' %}">Click here to edit a object</a></li>
+</ul>
+{% for item in inventory_list %}
+
+<h3>{{item.name}}</h3>
+<p>{{item.description}}</p>
+<p>Current Quantity: {{item.quantity}}</p>
+
+
+{% endfor %}
+
+{% endblock %}

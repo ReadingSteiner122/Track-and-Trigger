@@ -1,0 +1,20 @@
+{% extends 'base_layout.html' %}
+
+{% block title %} Add Todo Object {% endblock %}
+
+{% block body %}
+<div class="container">
+
+    <h1>Add Todo Object</h1>
+
+    <form action="{% url 'addtodomodelform' %}" method="post">
+
+        {% csrf_token %}
+
+{{todomodelform.as_p}}
+<input type="submit" class="btn btn-success" value="Add deadline"/>
+
+</form>
+
+</div>
+{% endblock %}

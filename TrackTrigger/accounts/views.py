@@ -1,66 +1,62 @@
 from django.shortcuts import render, redirect
-from django.contrib.auth import login, authenticate, logout
-from accounts.forms import UserSignUpForm, ProfileAuthenticationForm, ProfileUpdateForm
+from django.contrib.auth.forms import UserCreationForm, AuthenticationForm
+from django.contrib.auth import login, logout, authenticate
+from django.contrib import messages
+from .forms import UserSignUpForm
+from django.core.mail import send_mail
+from django.core.mail import EmailMultiAlternatives
+from django.template.loader import get_template
+from django.template import Context
 
-def registration_view(request):
-    context = {}
-    if request.POST:
-        form = UserSignUpForm(request.POST)
-        if form.is_valid():
-            form.save()
-            username = form.cleaned_data.get('username')
-            raw_password = form.cleaned_data.get('password1')
-            profile = authenticate(username=username, password=raw_password)
-            login(request, profile)
-            return redirect('home')
-        else:
-            context['UserSignUp_form'] = form
+
+# Create your views here.
+def signup_view(request):
+    form = UserSignUpForm(request.POST)
+    if form.is_valid():
+        user = form.save()
+        username = form.cleaned_data.get('username')
+        email = form.cleaned_data.get('email')
+        htmly = get_template('accounts/Email.html')
+        d = { 'username':username }
+        subject, from_email, to = 'welcome', 'salilsanat@gmail.com', email
+        html_content = htmly.render(d)
+        msg = EmailMultiAlternatives(subject, html_content, from_email, [to])
+        msg.attach_alternative(html_content, "text / html")
+        msg.send()
+        messages.success(request, f'Your Account has been created')
+        login(request, user, backend='django.contrib.auth.backends.ModelBackend')
+        #return redirect('dashboard:home')
+        return redirect('home')
     else:
         form = UserSignUpForm()
-        context['UserSignUp_form'] = form
-    return render(request, 'accounts/signup.html', context)
-
-
-def logout_view(request):
-    logout(request)
-    return redirect('home')
+    return render(request, 'accounts/signup.html', {'form':form})
 
 def login_view(request):
-    context = {}
-    user = request.user
-    if user.is_authenticated:
-        return redirect('home')
+    if request.method == 'POST':
+        username = request.POST['username']
+        password = request.POST['password']
+        user = authenticate(request, username = username, password = password)
+    #if request.method == 'POST':
+        #form = AuthenticationForm(request.POST)
+        #if form.is_valid():
+        #    login(request, user)
+        #    return redirect('home')
+    #else:
+        #form = AuthenticationForm()
+    #return render(request, 'accounts/login.html', {'form':form})
+        if user is not None:
+            form = login(request, user, backend='django.contrib.auth.backends.ModelBackend')
+            messages.success(request, f'Welcome { username }!')
+            return redirect('home')
+        else:
+            messages.info(request, f'Account does not exist')
+    form = AuthenticationForm()
+    return render(request, 'accounts/login.html', {'form':form})
 
-    if request.POST:
-        form = ProfileAuthenticationForm(request.POST)
-        if form.is_valid():
-            username = request.POST['username']
-            password = request.POST['password']
-            profile = authenticate(username=username, password=password)
-            if profile.is_authenticated:
-                login(request, profile)
-                return redirect("home")
-    else:
-        form = ProfileAuthenticationForm()
-    context['login_form'] = form
-    return render(request, 'accounts/login.html', context)
+def logout_view(request):
+    if request.method == 'POST':
+        logout(request)
+    return redirect('home')
 
 def profile_view(request):
-    if not request.user.is_authenticated:
-        return redirect('login')
-    context = {}
-
-    if request.POST:
-        form = ProfileUpdateForm(request.POST, instance=request.user)
-        if form.is_valid():
-            form.save()
-    else:
-        form = ProfileUpdateForm(
-            initial={
-            "email": request.user.email,
-            "username": request.user.username,
-            "phone_no": request.user.phone_no,
-            }
-        )
-    context['profile_form'] = form
-    return render(request, 'accounts/profile.html', context)
+    return redirect('home')

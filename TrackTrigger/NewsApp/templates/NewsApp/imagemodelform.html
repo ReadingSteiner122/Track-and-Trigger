@@ -1,0 +1,20 @@
+{% extends 'base_layout.html' %}
+
+{% block title %} Add Entry {% endblock %}
+
+{% block body %}
+<div class="container">
+
+    <h1>Image Model Form</h1>
+
+    <form action="{% url 'addimagemodelform' %}" method="post" enctype = "multipart/form-data" action = "/foo/">
+
+        {% csrf_token %}
+        {{imagemodelform.media}}
+{{imagemodelform.as_p}}
+<input type="submit" class="btn btn-success" value="Upload"/>
+
+</form>
+
+</div>
+{% endblock %}

@@ -1,0 +1,42 @@
+{% extends 'base_layout.html' %}
+
+{% block title %} Add Entry {% endblock %}
+
+{% block body %}
+<div class="container">
+    <h1>Entry Form</h1>
+    <ul class = "messages">
+        {% for msg in messages %}
+            <li>
+
+                    <div class="alert alert-{{msg.level_tag}}" role = "alert">
+
+                            {{msg.message}}
+
+                    </div>
+
+            </li>
+        {% endfor %}
+
+    </ul>
+
+    <form action="{% url 'NewEntry' %}" method="POST">
+        {% csrf_token %}
+        <form>
+            <div class="form-group">
+                <label>Title</label>
+                {{form.title}}
+              </div>
+
+              <div class="form-group">
+                <label>Content</label>
+                {{form.description}}
+              </div>
+
+            <button type="submit" class="btn btn-primary">Add Entry</button>
+          </form>
+
+    </form>
+</div>
+
+{% endblock %}

@@ -1,0 +1,18 @@
+{% extends 'base_layout.html' %}
+
+{% block title %} Diary {% endblock %}
+
+{% block body %}
+<h1>Here is the full entry</h1>
+
+<div class = "Entries"></div>
+
+<div class = "Entries">
+
+<h3>{{ind_entry.title}}</h3>
+<p>{{ind_entry.description}}</p>
+<p>{{ind_entry.d_date}}</p>
+</div>
+
+</div>
+{% endblock %}

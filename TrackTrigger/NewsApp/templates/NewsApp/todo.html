@@ -1,0 +1,20 @@
+{% extends 'base_layout.html' %}
+
+{% block title %}To-Do List {% endblock %}
+
+{% block body %}
+<h1>this is the todolist page</h1>
+<ul>
+    <li><a href="{% url 'todomodelform' %}">Click here to add a new goal</a></li>
+</ul>
+
+{% for item in todo_list %}
+
+<h3>{{item.name}}</h3>
+<p>{{item.description}}</p>
+<p>Must be completed by: {{item.date}}</p>
+
+
+{% endfor %}
+
+{% endblock %}

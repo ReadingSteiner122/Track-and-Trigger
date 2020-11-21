@@ -2,5 +2,9 @@
 
 {% block content %}
 <h1>Welcome Home</h1>
-  <p>Welcome to the Homepage</p>
+{% if user.is_authenticated %}
+  <p> Welcome, {{ user.username }}
+{% else %}
+  <p>Welcome to the Homepage</h1>
+{% endif %}
 {% endblock %}

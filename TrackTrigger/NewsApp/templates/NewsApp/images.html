@@ -1,0 +1,22 @@
+{% extends 'base_layout.html' %}
+
+{% block title %} Images {% endblock %}
+
+{% block body %}
+<h1>this is the image page</h1>
+<ul>
+    <li><a href="{% url 'imagemodelform' %}">Click here to add an image</a></li>
+</ul>
+
+<div class = "Entries">
+
+{% for obj in list %}
+<div class = "Entries">
+<img src="{{obj.image.url}}"/>
+<h3>{{obj.name}}</h3>
+
+</div>
+
+{% endfor %}
+</div>
+{% endblock %}

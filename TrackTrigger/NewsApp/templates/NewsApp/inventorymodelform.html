@@ -1,0 +1,20 @@
+{% extends 'base_layout.html' %}
+
+{% block title %} Add Inventoy Object {% endblock %}
+
+{% block body %}
+<div class="container">
+
+    <h1>Add Inventory Object</h1>
+
+    <form action="{% url 'addinventorymodelform' %}" method="post">
+
+        {% csrf_token %}
+
+{{inventorymodelform.as_p}}
+<input type="submit" class="btn btn-success" value="Add object"/>
+
+</form>
+
+</div>
+{% endblock %}

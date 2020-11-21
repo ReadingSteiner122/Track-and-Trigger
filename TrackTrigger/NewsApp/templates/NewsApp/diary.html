@@ -1,0 +1,24 @@
+{% extends 'base_layout.html' %}
+
+{% block title %} Diary {% endblock %}
+
+{% block body %}
+<h1>this is the diary page</h1>
+
+<ul>
+    <li><a href="{% url 'diarymodelform' %}">Click here to add new entry</a></li>
+</ul>
+
+<div class = "Entries">
+
+{% for note in note_list %}
+<div class = "Entries">
+
+<h3><a href = "{% url 'diaryentry' slug=note.slug %}">{{note.title}}</a></h3>
+<p>{{note.snippet}}</p>
+<p>{{note.d_date}}</p>
+</div>
+
+{% endfor %}
+</div>
+{% endblock %}

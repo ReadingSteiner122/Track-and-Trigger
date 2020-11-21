@@ -1,5 +1,5 @@
 """
-WSGI config for TrackTrigger3 project.
+WSGI config for TrackTrigger project.
 
 It exposes the WSGI callable as a module-level variable named ``application``.
 
