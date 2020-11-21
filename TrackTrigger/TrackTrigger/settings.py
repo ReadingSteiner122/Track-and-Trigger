@@ -43,6 +43,7 @@ INSTALLED_APPS = [
     'accounts',
     'NewsApp',
     'social_django',
+    'rest_framework',
 ]
 
 AUTHENTICATION_BACKENDS = [

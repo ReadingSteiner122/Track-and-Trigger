@@ -5,7 +5,13 @@
         <li><a href="{% url 'inventory' %}">Inventory</a></li>
         <li><a href="{% url 'image' %}">Images</a></li>
         <li><a href="{% url 'todolist' %}">To-Do List</a></li>
+        {% if user.is_authenticated %}
+        <li><a href="{% url 'accounts:logout' %}">Logout</a></li>
+        <p> Welcome, {{user.username}}</p>
+        {% else %}
         <li><a href="{% url 'login' %}">Login</a></li>
         <li><a href="{% url 'accounts:signup' %}">Sign Up</a></li>
+        <p>Welcome to BruhApp</p>
+        {% endif %}
     </ul>
 </nav>
