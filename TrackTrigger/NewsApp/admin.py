@@ -2,8 +2,8 @@ from django.contrib import admin
 from .models import *
 # Register your models here.
 class DiaryAdmin(admin.ModelAdmin):
-    list_display = ['title', 'description', 'd_date']
-    search_fields = ['title']
+    list_display = ['title', 'description', 'd_date' ,'user']
+    search_fields = ['title', 'user']
     readonly_fields = ['d_date']
 
     filter_horizontal = []
@@ -11,8 +11,8 @@ class DiaryAdmin(admin.ModelAdmin):
     fieldsets = []
 
 class InventoryObjectAdmin(admin.ModelAdmin):
-    list_display = ['name', 'description', 'quantity']
-    search_fields = ['name']
+    list_display = ['name', 'description', 'quantity', 'user']
+    search_fields = ['name', 'user']
     readonly_fields = []
 
     filter_horizontal = []
@@ -20,8 +20,8 @@ class InventoryObjectAdmin(admin.ModelAdmin):
     fieldsets = []
 
 class ToDoItemAdmin(admin.ModelAdmin):
-    list_display = ['name', 'description', 'date']
-    search_fields = ['name', 'date']
+    list_display = ['name', 'description', 'date', 'user']
+    search_fields = ['name', 'date', 'user']
     readonly_fields = []
 
     filter_horizontal = []

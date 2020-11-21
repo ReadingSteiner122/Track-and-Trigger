@@ -20,6 +20,7 @@ class InventoryObjectSerializer(serializers.ModelSerializer):
 class ImageObjectSerializer(serializers.Serializer):
     name = serializers.CharField()
     image = serializers.ImageField()
+    user = serializers.CharField()
 
 class ToDoItemSerializer(serializers.ModelSerializer):
     class Meta:
