@@ -9,14 +9,16 @@ import Login from './OutsideApp/Login/Login'
 function App() {
   return (
     <Router>
+    
     <div className="App">
       {/* <Login/> */}
-      <Route exact path="/login"><Login /></Route>  
+      <Route exact path="/"><Login /></Route>  
       <Route exact path="/forgot1"><Form1 /></Route>
       <Route exact path="/forgot2"><Form2 /></Route> 
-      <Route exact path="/"><Dashboard /></Route>
+      <Route exact path="/dashboard"><Dashboard /></Route>
     </div>
     </Router>
+    
   );
 }
 
