@@ -10,7 +10,7 @@
     <form action="{% url 'editquantity' %}" method="post">
 
         {% csrf_token %}
-
+        {{d.as_p}}
 {{f.as_p}}
 <input type="submit" class="btn btn-success" value="Edit object"/>
 

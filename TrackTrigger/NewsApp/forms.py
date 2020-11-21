@@ -1,6 +1,7 @@
 from django import forms
 from django.utils import timezone
 from .models import *
+from datetime import datetime
 
 
 class DiaryEntryForm(forms.ModelForm):
@@ -54,3 +55,8 @@ class ToDoForm(forms.ModelForm):
             'description':forms.TextInput(attrs={'class':'form-control','placeholder':'description'}),
             'date':forms.DateInput(format=('%m/%d/%Y'), attrs={'class':'form-control', 'placeholder':'Select a date', 'type':'date'})
         }
+
+class AddDate(forms.Form):
+    date = forms.DateField(required = False, label='When do you have to restock?', 
+    widget=forms.DateInput(format=('%m/%d/%Y'), attrs={'class':'form-control', 'placeholder':'Select a date', 'type':'date'}),
+    initial = datetime(9999,1,1))

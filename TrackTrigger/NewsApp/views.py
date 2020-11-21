@@ -57,16 +57,24 @@ def addInventoryModelForm(request):
 
 def NewQuantityForm(request):
     context={
-        "f":ChangeQuantityForm
+        "f":ChangeQuantityForm,
+        "d":AddDate
     }
-    return render(request, 'NewsApp/newquantity.html',context)
+    return render(request, 'newquantity.html',context)
 
 def EditQuantityForm(request):
     f = ChangeQuantityForm(request.POST)
-    if f.is_valid():
+    d = AddDate(request.POST)
+    if (f.is_valid() & d.is_valid()):
         s = f.cleaned_data.get('name')
         i = f.cleaned_data.get('quantity')
         a = InventoryObject.objects.filter(name=s).update(quantity=i)
+        date = d.cleaned_data.get('date')
+        if(date != None):
+            b = InventoryObject.objects.filter(name=s)
+            desc = b.values('description')
+            newitem = ToDoItem(name = s, description = desc[0]['description'], date = date)   
+            newitem.save()
     return redirect('inventory')
 
 def imagePage(request):
