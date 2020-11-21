@@ -7,7 +7,7 @@ from django.contrib import messages
 
 
 def diaryPage(request):
-    note_list = reversed(Diary.objects.all())
+    note_list = reversed(Diary.objects.filter(user=request.user))
     context={
         'note_list': note_list
     }
@@ -31,12 +31,14 @@ def addDiaryModelForm(request):
     mydiarymodelform = DiaryEntryForm(request.POST)
 
     if mydiarymodelform.is_valid():
-        mydiarymodelform.save()
+        instance = mydiarymodelform.save(commit = False)
+        instance.user = request.user
+        instance.save()
         messages.add_message(request, messages.SUCCESS, "Your entry has been logged")
     return redirect('diary')
 
 def InventoryPage(request):
-    inventory_list = InventoryObject.objects.all()
+    inventory_list = InventoryObject.objects.filter(user=request.user)
     context={
         'inventory_list': inventory_list
     }
@@ -52,7 +54,9 @@ def addInventoryModelForm(request):
     myinventorymodelform = NewInventoryForm(request.POST)
 
     if myinventorymodelform.is_valid():
-        myinventorymodelform.save()
+        instance = myinventorymodelform.save(commit = False)
+        instance.user = request.user
+        instance.save()
     return redirect('inventory')
 
 def NewQuantityForm(request):
@@ -68,7 +72,7 @@ def EditQuantityForm(request):
     if (f.is_valid() & d.is_valid()):
         s = f.cleaned_data.get('name')
         i = f.cleaned_data.get('quantity')
-        a = InventoryObject.objects.filter(name=s).update(quantity=i)
+        a = InventoryObject.objects.filter(name=s, user=request.user).update(quantity=i)
         date = d.cleaned_data.get('date')
         if(date != None):
             b = InventoryObject.objects.filter(name=s)
@@ -78,7 +82,7 @@ def EditQuantityForm(request):
     return redirect('inventory')
 
 def imagePage(request):
-    image_list = reversed(ImageObject.objects.all())
+    image_list = reversed(ImageObject.objects.filter(user=request.user))
     context={
         'list': image_list
     }
@@ -94,12 +98,14 @@ def addImageModelForm(request):
     myimagemodelform = ImageEntryForm(request.POST, request.FILES)
 
     if myimagemodelform.is_valid():
-        myimagemodelform.save()
+        instance = myimagemodelform.save(commit = False)
+        instance.user = request.user
+        instance.save()
         messages.add_message(request, messages.SUCCESS, "Your image has been uploaded")
     return redirect('image')
 
 def ToDoPage(request):
-    todo_list = ToDoItem.objects.all()
+    todo_list = ToDoItem.objects.filter(user=request.user)
     context={
         'todo_list': todo_list
     }
@@ -115,5 +121,7 @@ def addToDoModelForm(request):
     mytodomodelform = ToDoForm(request.POST)
 
     if mytodomodelform.is_valid():
-        mytodomodelform.save()
+        instance = mytodomodelform.save(commit = False)
+        instance.user = request.user
+        instance.save()
     return redirect('todolist')
