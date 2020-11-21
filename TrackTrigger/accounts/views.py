@@ -7,6 +7,9 @@ from django.core.mail import send_mail
 from django.core.mail import EmailMultiAlternatives
 from django.template.loader import get_template
 from django.template import Context
+from rest_framework.decorators import api_view
+from rest_framework.response import Response
+
 
 
 # Create your views here.
@@ -60,3 +63,8 @@ def logout_view(request):
 
 def profile_view(request):
     return redirect('home')
+
+#@api_view(['GET'])
+#def apiOverview(request):
+#    api_list = {
+    #    }

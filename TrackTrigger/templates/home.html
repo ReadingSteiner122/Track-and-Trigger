@@ -1,10 +1,10 @@
 {% extends 'base_layout.html' %}
 
-{% block content %}
+{% block body %}
 <h1>Welcome Home</h1>
 {% if user.is_authenticated %}
-  <p> Welcome, {{ user.username }}
+  <p> Welcome, {{ user.username }} </p>
 {% else %}
-  <p>Welcome to the Homepage</h1>
+  <p>Welcome to the Homepage</p>
 {% endif %}
 {% endblock %}

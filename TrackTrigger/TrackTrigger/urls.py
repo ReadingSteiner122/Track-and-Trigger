@@ -37,5 +37,5 @@ urlpatterns = [
     path('NewsApp/inventorymodelform/', InventoryModelForm, name = 'inventorymodelform'),
     path('NewsApp/addinventorymodelform/', addInventoryModelForm, name = 'addinventorymodelform'),
     path('NewsApp/quantityform/', NewQuantityForm, name = 'newquantity'),
-    path('NewsApp/editquantityform/', EditQuantityForm, name = 'editquantity')
+    path('NewsApp/editquantityform/', EditQuantityForm, name = 'editquantity'),
 ]

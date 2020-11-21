@@ -6,8 +6,9 @@
         <li><a href="{% url 'image' %}">Images</a></li>
         <li><a href="{% url 'todolist' %}">To-Do List</a></li>
         {% if user.is_authenticated %}
-        <li><a href="{% url 'accounts:logout' %}">Logout</a></li>
-        <p> Welcome, {{user.username}}</p>
+        <li><form class="logout-link" action="{% url 'accounts:logout' %}"method="post">
+            {% csrf_token %}
+        <button type="submit">Logout</button>
         {% else %}
         <li><a href="{% url 'login' %}">Login</a></li>
         <li><a href="{% url 'accounts:signup' %}">Sign Up</a></li>
