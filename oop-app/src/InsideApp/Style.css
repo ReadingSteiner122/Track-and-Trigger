@@ -1,0 +1,58 @@
+.header{
+    background-color:	rgb(255, 72, 0);            /* #5680E9,crimson,teal, */
+    display: block;
+    opacity:1;
+    overflow:auto;
+    
+}
+
+.appName{
+    text-align: center;
+    color:white;
+    font-weight: bold;
+    font-style: italic;
+    font-size: 60px;
+}
+
+.logo{
+    width:50%;
+    position: absolute;
+    float: left;
+    top:2%;
+    left:25%;
+}
+
+.navbar{
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+    
+    width: 15%;
+    background-color:black;
+    position: fixed;
+    height: 100%;
+    overflow: auto;
+    text-align: center;
+  }
+
+  .navbutton {
+    display: block;
+    color:whitesmoke;
+    padding: 8px 16px;
+    text-decoration: none;
+  }
+  
+  .navbutton.active {
+    background-color: #4CAF50;
+    color: white;
+  }
+  
+  .navbutton:hover:not(.active) {
+    background-color:white;
+    color:black;
+  }
+.content{
+    margin-left: 15%;
+    padding:1px 16px;
+    height:10000px;
+}

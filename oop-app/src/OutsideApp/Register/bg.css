@@ -1,0 +1,84 @@
+body{
+    background-color: rgb(255, 72, 0);
+}
+
+.h{
+    text-align: center;
+}
+.logo{
+    width: 15%;
+}
+.log {
+    text-align: center;
+}
+.form1 {
+    margin: 0 5px 0 0;
+    text-align: center;
+    font-weight: bold;
+}
+
+input[type="submit"] {
+    background: #000099;
+    text-align: center;
+    cursor: pointer;
+    color: white;
+    height: 25px;
+    width: 60px;
+}
+
+.ff{
+    text-align: center;
+    font-weight: bold; 
+}
+
+.ff2 {
+    text-align: center;
+    font-weight: bold; 
+}
+
+.form2 {
+    margin: 0 30px 0 0;
+    text-align: center;
+    font-weight: bold;
+}
+
+.form3 {
+    margin: 0 0 0 0;
+    text-align: center;
+    font-weight: bold;
+}
+
+.ff14 {
+    text-align: center;
+    font-weight: bold; 
+}
+
+.pp {
+    margin: 0 60px 0 0;
+    text-align: center;
+    font-weight: bold;
+}
+
+.pp2 {
+    margin: 0 0 0 0;
+    text-align: center;
+    font-weight: bold;
+}
+
+.uu {
+    margin: 0 60px 0 0;
+    text-align: center;
+    font-weight: bold;
+}
+
+.pro1 {
+    margin: 0 50px 0 0;
+    text-align: center;
+    font-weight: bold;
+}
+
+.ph1 {
+    margin: 0 20px 0 0;
+    text-align: center;
+    font-weight: bold;
+}
