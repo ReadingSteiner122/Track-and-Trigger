@@ -3,6 +3,7 @@ import './bg.css'
 
 import LogoName from './LogoName'
 import Form1 from './Form1'
+import AForgotPassword from './AForgotPassword'
 
 class ForgotPassword1 extends React.Component{
     render(){
@@ -11,9 +12,7 @@ class ForgotPassword1 extends React.Component{
                 <div className="h">
                     <LogoName/>
                 </div>
-                <div className="reg1">
-                    <Form1/>
-                 </div>
+                <AForgotPassword />
             </div>
         )
     }

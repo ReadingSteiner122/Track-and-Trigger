@@ -5,6 +5,7 @@ import {Redirect} from 'react-router-dom'
 import LogoName from './LogoName'
 import Form1 from './Form1'
 import Form2 from './Form2'
+import Alogin from './Alogin'
 
 class Login extends React.Component{
     render(){
@@ -13,12 +14,9 @@ class Login extends React.Component{
                 <div className="h">
                     <LogoName/>
                     </div>
-                    <div className="log">
-                    <Form1/>
-                    <h2>OR</h2>
-                    <Form2/>
-                    
-                 </div>
+                    <div>
+                        <Alogin />
+                    </div>
             </div>
         )
     }

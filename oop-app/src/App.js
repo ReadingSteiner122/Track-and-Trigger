@@ -1,4 +1,5 @@
 import { BrowserRouter as Router} from "react-router-dom";
+import React from 'react';
 import { Link,Route,Switch } from 'react-router-dom';
 import './App.css';
 import Dashboard from "./InsideApp/Dashboard";
@@ -10,7 +11,11 @@ import Notes from './InsideApp/Pages/Notes/Notes';
 import Inventory from './InsideApp/Pages/Inventory/Inventory';
 import Files from './InsideApp/Pages/Files/Files';
 import ToDo from './InsideApp/Pages/ToDo List/ToDo';
+
 import 'antd/dist/antd.css';
+import Register from "./OutsideApp/Register/Register";
+import ForgotPassword1 from "./OutsideApp/ForgotPassword/ForgotPassword1";
+import ForgotPassword2 from "./OutsideApp/ForgotPassword/ForgotPassword2";
 
 function App() {
   return (
@@ -19,8 +24,9 @@ function App() {
     <div className="App">
       {/* <Login/> */}
       <Route exact path="/"><Login /></Route>  
-      <Route exact path="/forgot1"><Form1 /></Route>
-      <Route exact path="/forgot2"><Form2 /></Route> 
+      <Route exact path="/register"><Register /></Route> 
+      <Route exact path="/forgot1"><ForgotPassword1 /></Route>
+      <Route exact path="/forgot2"><ForgotPassword2 /></Route> 
       <Route exact path="/dashboard"><Dashboard /></Route>
       <Route exact path="/dashboard/account"><Account /></Route>
       <Route exact path="/dashboard/notes"><Notes /></Route>
