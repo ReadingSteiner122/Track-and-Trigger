@@ -10,6 +10,7 @@ import Notes from './InsideApp/Pages/Notes/Notes';
 import Inventory from './InsideApp/Pages/Inventory/Inventory';
 import Files from './InsideApp/Pages/Files/Files';
 import ToDo from './InsideApp/Pages/ToDo List/ToDo';
+import 'antd/dist/antd.css';
 
 function App() {
   return (
