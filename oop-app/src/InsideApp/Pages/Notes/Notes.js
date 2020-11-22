@@ -3,7 +3,7 @@ import '../../Style.css'
 
 import Navbar from '../../Navbar'
 import Header from '../../Header'
-import Content from '../../Content'
+import Article from './Article';
 
 class Notes extends React.Component{
     render(){
@@ -11,7 +11,9 @@ class Notes extends React.Component{
             <div>
                 <Navbar/>
                 <Header/>
-                <Content/>
+                <div className="content">
+                    <Article/>;
+                </div>
             </div>
         )
     }
