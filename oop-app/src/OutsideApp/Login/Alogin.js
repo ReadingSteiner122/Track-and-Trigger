@@ -34,7 +34,7 @@ const Alogin = (props) => {
       <div style={{width:500, alignSelf:"center", flex:1, marginLeft:450}}>
     <Form
       {...layout}
-      name="basic"
+      name="login"
       initialValues={{
         remember: true,
       }}
@@ -73,7 +73,7 @@ const Alogin = (props) => {
 
       <Form.Item {...tailLayout}>
         <Button type="primary" htmlType="submit">
-          Submit
+          Login
         </Button>
       </Form.Item>
     </Form>

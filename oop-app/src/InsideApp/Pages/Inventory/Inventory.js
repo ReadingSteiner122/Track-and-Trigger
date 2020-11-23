@@ -4,6 +4,7 @@ import '../../Style.css'
 import Navbar from '../../Navbar'
 import Header from '../../Header'
 import Content from '../../Content'
+import AInventory from './AInventory'
 
 class Inventory extends React.Component{
     render(){
@@ -11,7 +12,9 @@ class Inventory extends React.Component{
             <div>
                 <Navbar/>
                 <Header/>
-                <Content/>
+                <div>
+                    <AInventory />
+                </div>
             </div>
         )
     }

@@ -1,6 +1,6 @@
 import React from 'react'
 import '../../Style.css'
-
+import Button from 'antd'
 import Navbar from '../../Navbar'
 import Header from '../../Header'
 import Article from './Article';
@@ -12,7 +12,7 @@ class Notes extends React.Component{
                 <Navbar/>
                 <Header/>
                 <div className="content">
-                    <Article/>;
+                    <Article/>
                 </div>
             </div>
         )

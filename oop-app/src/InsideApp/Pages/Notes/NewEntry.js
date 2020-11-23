@@ -1,8 +1,9 @@
 import React from 'react';
-import { Form, Input, Button, Checkbox } from 'antd';
+import { Form, Input, Button } from 'antd';
 import 'antd/dist/antd.css';
 import { Link,Route,Switch,Redirect, useHistory } from 'react-router-dom';
 
+const { TextArea } = Input;
 const layout = {
   labelCol: {
     span: 8,
@@ -18,11 +19,11 @@ const tailLayout = {
   },
 };
 
-const ARegister = (props) => {
+const NewEntry = (props) => {
     const history=useHistory()
   const onFinish = (values) => {
     console.log('Success:', values);
-    history.push("/login")
+    history.push("/notes")
   };
 
   const onFinishFailed = (errorInfo) => {
@@ -32,9 +33,12 @@ const ARegister = (props) => {
   return (
       <div style={{flex:1, alignItems:"center", width:2000, alignContent:"center"}}>
       <div style={{width:500, alignSelf:"center", flex:1, marginLeft:450}}>
+          <br></br>
+          <br></br>
+          <br></br>
     <Form
       {...layout}
-      name="reg"
+      name="newentry"
       initialValues={{
         remember: true,
       }}
@@ -42,12 +46,12 @@ const ARegister = (props) => {
       onFinishFailed={onFinishFailed}
     >
       <Form.Item
-        label="Username"
-        name="username"
+        label="Title"
+        name="title"
         rules={[
           {
             required: true,
-            message: 'Please input your username!',
+            message: 'Please enter the title!',
           },
         ]}
       >
@@ -55,38 +59,12 @@ const ARegister = (props) => {
       </Form.Item>
 
       <Form.Item
-        label="Password"
-        name="password"
+        label="Date"
+        name="date"
         rules={[
           {
             required: true,
-            message: 'Please input your password!',
-          },
-        ]}
-      >
-        <Input.Password />
-      </Form.Item>
-
-      <Form.Item
-        label="Re-enter Password"
-        name="Re-enter Password"
-        rules={[
-          {
-            required: true,
-            message: 'Please re-input your password!',
-          },
-        ]}
-      >
-        <Input.Password />
-      </Form.Item>
-
-      <Form.Item
-        label="PhoneNo"
-        name="phoneno"
-        rules={[
-          {
-            required: true,
-            message: 'Please input your phone number!',
+            message: 'Please enter the date!',
           },
         ]}
       >
@@ -94,16 +72,19 @@ const ARegister = (props) => {
       </Form.Item>
 
       <Form.Item
-        label="Profession"
-        name="profession"
+        label="Entry"
+        name="entry"
         rules={[
           {
             required: true,
-            message: 'Please input your profession!',
+            message: 'Please tell us how your day was!',
           },
         ]}
       >
-        <Input />
+        <TextArea
+          placeholder="How was your day?"
+          autoSize={{ minRows: 2, maxRows: 6 }}
+        />
       </Form.Item>
 
       <Form.Item {...tailLayout}>
@@ -117,4 +98,4 @@ const ARegister = (props) => {
   );
 };
 
-export default ARegister;
+export default NewEntry;

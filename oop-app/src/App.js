@@ -3,8 +3,6 @@ import React from 'react';
 import { Link,Route,Switch } from 'react-router-dom';
 import './App.css';
 import Dashboard from "./InsideApp/Dashboard";
-import Form1 from "./OutsideApp/ForgotPassword/Form1";
-import Form2 from "./OutsideApp/ForgotPassword/Form2";
 import Login from './OutsideApp/Login/Login'
 import Account from './InsideApp/Pages/Account/Account';
 import Notes from './InsideApp/Pages/Notes/Notes';
@@ -16,7 +14,7 @@ import 'antd/dist/antd.css';
 import Register from "./OutsideApp/Register/Register";
 import ForgotPassword1 from "./OutsideApp/ForgotPassword/ForgotPassword1";
 import ForgotPassword2 from "./OutsideApp/ForgotPassword/ForgotPassword2";
-import AToDo from "./InsideApp/Pages/ToDo List/AToDo";
+import NewEntry from "./InsideApp/Pages/Notes/NewEntry";
 
 function App() {
   return (
@@ -34,6 +32,7 @@ function App() {
       <Route exact path="/dashboard/inventory"><Inventory /></Route>
       <Route exact path="/dashboard/file"><Files /></Route>
       <Route exact path="/dashboard/to-do"><ToDo /></Route>
+      <Route exact path="/dashboard/notes/new"><NewEntry /></Route>
     </div>
     </Router>
     

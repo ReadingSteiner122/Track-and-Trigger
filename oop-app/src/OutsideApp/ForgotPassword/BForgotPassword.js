@@ -34,7 +34,7 @@ const BForgotPassword = (props) => {
       <div style={{width:500, alignSelf:"center", flex:1, marginLeft:450}}>
     <Form
       {...layout}
-      name="basic"
+      name="forgot2"
       initialValues={{
         remember: true,
       }}
