@@ -4,6 +4,7 @@ import '../../Style.css'
 import Navbar from '../../Navbar'
 import Header from '../../Header'
 import Content from '../../Content'
+import AToDo from './AToDo'
 
 class ToDo extends React.Component{
     render(){
@@ -11,7 +12,9 @@ class ToDo extends React.Component{
             <div>
                 <Navbar/>
                 <Header/>
-                <Content/>
+                <div>
+                    <AToDo />
+                </div>
             </div>
         )
     }   

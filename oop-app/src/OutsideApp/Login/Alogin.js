@@ -77,7 +77,7 @@ const Alogin = (props) => {
         </Button>
       </Form.Item>
     </Form>
-    <div style={{marginLeft:450}}>
+    <div style={{marginLeft:450}} onClick={() => history.push("/forgot1")}>
     <Button type="primary">
           Forgot Password
         </Button>

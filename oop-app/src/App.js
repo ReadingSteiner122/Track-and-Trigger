@@ -16,6 +16,7 @@ import 'antd/dist/antd.css';
 import Register from "./OutsideApp/Register/Register";
 import ForgotPassword1 from "./OutsideApp/ForgotPassword/ForgotPassword1";
 import ForgotPassword2 from "./OutsideApp/ForgotPassword/ForgotPassword2";
+import AToDo from "./InsideApp/Pages/ToDo List/AToDo";
 
 function App() {
   return (
