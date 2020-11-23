@@ -20,6 +20,10 @@ class DiaryViewSet(viewsets.ModelViewSet):
     queryset = Diary.objects.all().order_by('title')
     serializer_class = DiarySerializer
 
+#class IndividualDiaryViewSet(viewsets.ModelViewSet):
+#    queryset = Diary.objects.filter('title')
+#    serializer_class = DiarySerializer
+
 class InventoryObjectViewSet(viewsets.ModelViewSet):
     queryset = InventoryObject.objects.all().order_by('name')
     serializer_class = InventoryObjectSerializer

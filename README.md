@@ -10,3 +10,10 @@
  That's about it.
  # How to Run
  If you want to run the app on your localhost server, run the command python manage.py runserver within the TrackTrigger directory.  
+ #REST-API Links
+  "users": "http://localhost:8000/api/users/",
+   "diary": "http://localhost:8000/api/diary/",
+   "inventory_object": "http://localhost:8000/api/inventory_object/",
+   "todoitem": "http://localhost:8000/api/todoitem/",
+   "image_object": "http://localhost:8000/api/image_object/"
+   You can test the response using POSTMAN (Download it online). To use POSTMAN simply click on the application, run the backend django server, and then try GET and POST requests to the required API link, you'll be able to see the response for GET requests.
