@@ -23,7 +23,7 @@ const NewEntry = (props) => {
     const history=useHistory()
   const onFinish = (values) => {
     console.log('Success:', values);
-    history.push("/notes")
+    history.push("/dashboard/notes")
   };
 
   const onFinishFailed = (errorInfo) => {
