@@ -10,7 +10,7 @@
  That's about it.
  # How to Run
  If you want to run the app on your localhost server, run the command python manage.py runserver within the TrackTrigger directory.  
- #REST-API Links
+ # REST-API Links
   "users": "http://localhost:8000/api/users/",
    "diary": "http://localhost:8000/api/diary/",
    "inventory_object": "http://localhost:8000/api/inventory_object/",
