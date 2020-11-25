@@ -7,85 +7,77 @@ const columns = [
   {
     title: 'Name',
     dataIndex: 'name',
-    render: (text) => <a>{text}</a>,
   },
   {
-    title: 'Date',
-    dataIndex: 'date',
+    title: 'Age',
+    dataIndex: 'age',
   },
   {
-    title: 'Description',
-    dataIndex: 'desc',
+    title: 'Address',
+    dataIndex: 'address',
   },
 ];
-const data = [
-  {
-    key: '1',
-    name: 'John Brown',
-    date: 32,
-    desc: 'New York No. 1 Lake Park',
-  },
-  {
-    key: '2',
-    name: 'Jim Green',
-    date: 42,
-    desc: 'London No. 1 Lake Park',
-  },
-  {
-    key: '3',
-    name: 'Joe Black',
-    date: 32,
-    desc: 'Sidney No. 1 Lake Park',
-  },
-  {
-    key: '4',
-    name: 'Disabled User',
-    date: 99,
-    desc: 'Sidney No. 1 Lake Park',
-  },
-]; // rowSelection object indicates the need for row selection
 
-const rowSelection = {
-  onChange: (selectedRowKeys, selectedRows) => {
-    console.log(`selectedRowKeys: ${selectedRowKeys}`, 'selectedRows: ', selectedRows);
-  },
-  getCheckboxProps: (record) => ({
-    disabled: record.name === 'Disabled User',
-    // Column configuration not to be checked
-    name: record.name,
-  }),
-};
+const data = [];
+for (let i = 0; i < 46; i++) {
+  data.push({
+    key: i,
+    name: `Edward King ${i}`,
+    age: 32,
+    address: `London, Park Lane no. ${i}`,
+  });
+}
 
-const AToDo = () => {
-  const [selectionType, setSelectionType] = useState('checkbox');
-  return (
-    <div>
-      <Radio.Group
-        onChange={({ target: { value } }) => {
-          setSelectionType(value);
-        }}
-        value={selectionType}
-      >
-        <Radio value="checkbox">Checkbox</Radio>
-        <Radio value="radio">radio</Radio>
-      </Radio.Group>
+class AToDo extends React.Component {
+  state = {
+    selectedRowKeys: [], // Check here to configure the default column
+  };
 
-      <Divider />
-    <div style={{marginLeft:250, marginRight:50}}>
-      <Table
-        rowSelection={{
-          type: selectionType,
-          ...rowSelection,
-        }}
-        columns={columns}
-        dataSource={data}
-      />
-    </div>
-    <Button type="primary">
-          Add Item
-        </Button>
-    </div>
-  );
-};
+  onSelectChange = selectedRowKeys => {
+    console.log('selectedRowKeys changed: ', selectedRowKeys);
+    this.setState({ selectedRowKeys });
+  };
+
+  render() {
+    const { selectedRowKeys } = this.state;
+    const rowSelection = {
+      selectedRowKeys,
+      onChange: this.onSelectChange,
+      selections: [
+        Table.SELECTION_ALL,
+        Table.SELECTION_INVERT,
+        {
+          key: 'odd',
+          text: 'Select Odd Row',
+          onSelect: changableRowKeys => {
+            let newSelectedRowKeys = [];
+            newSelectedRowKeys = changableRowKeys.filter((key, index) => {
+              if (index % 2 !== 0) {
+                return false;
+              }
+              return true;
+            });
+            this.setState({ selectedRowKeys: newSelectedRowKeys });
+          },
+        },
+        {
+          key: 'even',
+          text: 'Select Even Row',
+          onSelect: changableRowKeys => {
+            let newSelectedRowKeys = [];
+            newSelectedRowKeys = changableRowKeys.filter((key, index) => {
+              if (index % 2 !== 0) {
+                return true;
+              }
+              return false;
+            });
+            this.setState({ selectedRowKeys: newSelectedRowKeys });
+          },
+        },
+      ],
+    };
+    return <div style={{marginLeft:250, marginRight:50}}><Table rowSelection={rowSelection} columns={columns} dataSource={data} /></div>;
+  }
+}
 
 export default AToDo;
