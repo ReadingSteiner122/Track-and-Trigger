@@ -1,6 +1,6 @@
 import { BrowserRouter as Router} from "react-router-dom";
-import React from 'react';
-import { Link,Route,Switch } from 'react-router-dom';
+import React, { useEffect } from 'react';
+import { Route } from 'react-router-dom';
 import './App.css';
 import Dashboard from "./InsideApp/Dashboard";
 import Login from './OutsideApp/Login/Login'
@@ -9,14 +9,18 @@ import Notes from './InsideApp/Pages/Notes/Notes';
 import Inventory from './InsideApp/Pages/Inventory/Inventory';
 import Files from './InsideApp/Pages/Files/Files';
 import ToDo from './InsideApp/Pages/ToDo List/ToDo';
-
 import 'antd/dist/antd.css';
 import Register from "./OutsideApp/Register/Register";
 import ForgotPassword1 from "./OutsideApp/ForgotPassword/ForgotPassword1";
 import ForgotPassword2 from "./OutsideApp/ForgotPassword/ForgotPassword2";
 import NewEntry from "./InsideApp/Pages/Notes/NewEntry";
+import { connect } from "react-redux";
+import { fetchUserAction } from './Redux/ActionCreator'
 
-function App() {
+function App(props) {
+  useEffect(() => {
+    props.fetch_user();
+}, []);
   return (
     <Router>
     
@@ -39,4 +43,13 @@ function App() {
   );
 }
 
-export default App;
+const mapDispatchToProps = (dispatch) => {
+  return {
+      fetch_user: () => {
+          dispatch(fetchUserAction());
+      },
+  };
+};
+
+export default connect(null, mapDispatchToProps)(App);
+
