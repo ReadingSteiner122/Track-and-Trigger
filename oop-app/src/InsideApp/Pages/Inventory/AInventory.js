@@ -97,10 +97,12 @@ class AInventory extends React.Component {
       {
         title: 'age',
         dataIndex: 'age',
+        editable:true,
       },
       {
         title: 'address',
         dataIndex: 'address',
+        editable:true,
       },
       {
         title: 'operation',
