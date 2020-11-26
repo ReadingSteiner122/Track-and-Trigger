@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import ReactDOM from 'react-dom';
 import { Table, Radio, Divider, Button } from 'antd';
 import 'antd/dist/antd.css';
+import { Link } from 'react-router-dom';
 
 const columns = [
   {
@@ -15,6 +16,10 @@ const columns = [
   {
     title: 'Address',
     dataIndex: 'address',
+  },
+  {
+    title:'Date',
+    dataIndex:'date'
   },
 ];
 
@@ -32,7 +37,6 @@ class AToDo extends React.Component {
   state = {
     selectedRowKeys: [], // Check here to configure the default column
   };
-
   onSelectChange = selectedRowKeys => {
     console.log('selectedRowKeys changed: ', selectedRowKeys);
     this.setState({ selectedRowKeys });
@@ -76,7 +80,11 @@ class AToDo extends React.Component {
         },
       ],
     };
-    return <div style={{marginLeft:250, marginRight:50}}><Table rowSelection={rowSelection} columns={columns} dataSource={data} /></div>;
+    return <div style={{marginLeft:250, marginRight:50}}><div style={{marginBottom:10}}><Link to='/dashboard/to-do/new'><Button type="primary">
+    Add new entry
+  </Button></Link></div>
+  <Table rowSelection={rowSelection} columns={columns} dataSource={data} />
+  </div>;
   }
 }
 

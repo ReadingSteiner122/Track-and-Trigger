@@ -16,6 +16,7 @@ import ForgotPassword2 from "./OutsideApp/ForgotPassword/ForgotPassword2";
 import NewEntry from "./InsideApp/Pages/Notes/NewEntry";
 import { connect } from "react-redux";
 import { fetchUserAction } from './Redux/ActionCreator'
+import TNewEntry from "./InsideApp/Pages/ToDo List/TNewEntry";
 
 function App(props) {
   useEffect(() => {
@@ -37,6 +38,7 @@ function App(props) {
       <Route exact path="/dashboard/file"><Files /></Route>
       <Route exact path="/dashboard/to-do"><ToDo /></Route>
       <Route exact path="/dashboard/notes/new"><NewEntry /></Route>
+      <Route exact path="/dashboard/to-do/new"><TNewEntry /></Route>
     </div>
     </Router>
     

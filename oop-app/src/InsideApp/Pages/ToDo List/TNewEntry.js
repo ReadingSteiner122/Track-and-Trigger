@@ -2,7 +2,6 @@ import React from 'react';
 import { Form, Input, Button } from 'antd';
 import 'antd/dist/antd.css';
 import { Link,Route,Switch,Redirect, useHistory } from 'react-router-dom';
-import axios from 'axios';
 
 const { TextArea } = Input;
 const layout = {
@@ -20,21 +19,11 @@ const tailLayout = {
   },
 };
 
-const NewEntry = (props) => {
+const TNewEntry = (props) => {
     const history=useHistory()
   const onFinish = (values) => {
-    const data={
-      title:values.title,
-      date:values.date,
-      entry:values.entry
-    }
-    axios.post('http://localhost:8000/api/diary/',{data})
-  .then(res=>{
-    console.log(res);
-    console.log(res.data);
-  })
     console.log('Success:', values);
-    history.push("/dashboard/notes")
+    history.push("/dashboard/to-do")
   };
 
   const onFinishFailed = (errorInfo) => {
@@ -55,16 +44,14 @@ const NewEntry = (props) => {
       }}
       onFinish={onFinish}
       onFinishFailed={onFinishFailed}
-      
     >
       <Form.Item
-        label="Title"
-        name="title"
-        
+        label="Name"
+        name="name"
         rules={[
           {
             required: true,
-            message: 'Please enter the title!',
+            message: 'Please enter Name!',
           },
         ]}
       >
@@ -85,8 +72,8 @@ const NewEntry = (props) => {
       </Form.Item>
 
       <Form.Item
-        label="Entry"
-        name="entry"
+        label="Desc"
+        name="desc"
         rules={[
           {
             required: true,
@@ -95,9 +82,22 @@ const NewEntry = (props) => {
         ]}
       >
         <TextArea
-          placeholder="How was your day?"
+          placeholder="What do you want to do?"
           autoSize={{ minRows: 2, maxRows: 6 }}
         />
+      </Form.Item>
+
+      <Form.Item
+        label="User"
+        name="user"
+        rules={[
+          {
+            required: true,
+            message: 'Please enter the user!',
+          },
+        ]}
+      >
+        <Input />
       </Form.Item>
 
       <Form.Item {...tailLayout}>
@@ -111,4 +111,4 @@ const NewEntry = (props) => {
   );
 };
 
-export default NewEntry;
+export default TNewEntry;
