@@ -46,6 +46,7 @@ INSTALLED_APPS = [
     'rest_framework',
     'api',
     'corsheaders',
+    'knox',
 ]
 
 AUTHENTICATION_BACKENDS = [
@@ -69,7 +70,7 @@ MIDDLEWARE = [
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
 ]
 
-CORS_ALLOW_ALL_ORIGINS=True 
+CORS_ALLOW_ALL_ORIGINS=True
 
 ROOT_URLCONF = 'TrackTrigger.urls'
 
