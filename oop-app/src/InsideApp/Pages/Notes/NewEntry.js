@@ -94,7 +94,7 @@ render(){
           },
         ]}
       >
-        <Input placeholder="DD-MM-YYYY"/>
+        <Input placeholder="YYYY-MM-DD"/>
       </Form.Item>
 
       <Form.Item

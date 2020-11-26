@@ -3,13 +3,14 @@ import '../../Style.css'
 
 import Layout from '../../Containers/Layout'
 import FileList from '../../Containers/ListView'
+import AFile from './AFile'
 
 class Files extends React.Component{
     render(){
         return(
             <div>
                 <Layout>
-                    <FileList/>
+                    <AFile />
                 </Layout>
             </div>
         )

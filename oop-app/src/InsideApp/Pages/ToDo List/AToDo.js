@@ -91,23 +91,23 @@ class AToDo extends React.Component {
     this.columns = [
       {
         title: 'Name',
-        dataIndex: 'Name',
+        dataIndex: 'name',
         width: '30%',
         editable: true,
       },
       {
         title: 'Date',
-        dataIndex: 'Date',
+        dataIndex: 'date',
         editable:true,
       },
       {
         title: 'Description',
-        dataIndex: 'Description',
+        dataIndex: 'description',
         editable:true,
       },
       {
         title:'User',
-        dataIndex: 'User',
+        dataIndex: 'user',
         editable:true,
       },
       {
@@ -122,6 +122,7 @@ class AToDo extends React.Component {
       },
     ];
     this.state = {
+      key:0,
       dataSource: [],
       count: 0,
       newData:[],
@@ -133,7 +134,7 @@ class AToDo extends React.Component {
       var arr=[];
       for(var i=0;i<res.data.length;i++)
       {
-        arr.push({key:i+1,Name:res.data[i].name,Date:res.data[i].date,Description:res.data[i].description,User:res.data[i].user})
+        arr.push({key:i+1,name:res.data[i].name,date:res.data[i].date,description:res.data[i].description,user:res.data[i].user})
       }
       console.log(arr);
       this.setState({
@@ -142,32 +143,46 @@ class AToDo extends React.Component {
     })
   }
 
-  handleDelete = (key) => {
+  handleDelete = async (key) => {
     const dataSource = [...this.state.dataSource];
     this.setState({
       dataSource: dataSource.filter((item) => item.key !== key),
+
     });
+    console.log(key)
+    await axios.get('http://127.0.0.1:8000/api/todoitem/')
+    .then(async (res) =>{
+      console.log(res.data)
+      await this.setState({key:res.data[key-1].id})
+      console.log(this.state.key)
+    })
+    console.log(this.state.key)
+    await axios.delete('http://127.0.0.1:8000/api/todoitem/'+this.state.key+'/',{
+      headers:{
+        'Content-Type':'application/json'
+      }
+    })
   };
   handleAdd = () => {
     const { count, dataSource } = this.state;
     const newData = {
-      key: count,
-      Name: `Click to Add To Do Item Name`,
-      Date: '29-11-2020',
-      Description: `Click to add Description`,
-      User:7
+      name: `Click to Add To Do Item Name`,
+      date: '2020-11-29',
+      description: `Click to add Description`,
+      user:7
     };
     this.setState({
       dataSource: [...dataSource, newData],
       count: count + 1,
     });
-    axios.post('http://127.0.0.1:8000/api/todoitem/',{newData})
+    console.log(newData)
+    axios.post('http://127.0.0.1:8000/api/todoitem/',newData)
     .then(res=>{
       console.log(res);
       console.log(res.data);
     })
   };
-  handleSave = (row) => {
+  handleSave = async (row) => {
     const newData = [...this.state.dataSource];
     const index = newData.findIndex((item) => row.key === item.key);
     const item = newData[index];
@@ -175,6 +190,23 @@ class AToDo extends React.Component {
     this.setState({
       dataSource: newData,
     });
+    console.log(newData)
+    await axios.get('http://127.0.0.1:8000/api/todoitem/')
+    .then(async (res) =>{
+      console.log(res.data)
+      await this.setState({key:res.data[row.key-1].id})
+      console.log(this.state.key)
+    })
+    console.log(this.state.key)
+    await axios.put('http://127.0.0.1:8000/api/todoitem/'+this.state.key+'/',newData[row.key-1],{
+      headers:{
+        'Content-Type':'application/json'
+      }
+    })
+    .then(async (res)=>{
+      console.log(res);
+      console.log(res.data);
+    })
   };
 
   render() {
