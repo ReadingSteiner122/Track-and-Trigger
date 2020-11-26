@@ -1,10 +1,10 @@
-import React from 'react'
-import '../../Style.css'
+import React from 'react';
+import 'antd/dist/antd.css';
 
 import Layout from '../../Containers/Layout'
 import FileList from '../../Containers/ListView'
 
-class Files extends React.Component{
+class Inventory extends React.Component{
     render(){
         return(
             <div>
@@ -16,4 +16,4 @@ class Files extends React.Component{
     }
 }
 
-export default Files
+export default Inventory
