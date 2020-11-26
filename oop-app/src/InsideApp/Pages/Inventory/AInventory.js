@@ -1,6 +1,7 @@
 import React, { useContext, useState, useEffect, useRef } from 'react';
 import { Table, Input, Button, Popconfirm, Form } from 'antd';
 import 'antd/dist/antd.css';
+import axios from 'axios';
 
 const EditableContext = React.createContext();
 
@@ -89,19 +90,24 @@ class AInventory extends React.Component {
     super(props);
     this.columns = [
       {
-        title: 'name',
-        dataIndex: 'name',
+        title: 'Name',
+        dataIndex: 'Name',
         width: '30%',
         editable: true,
       },
       {
-        title: 'age',
-        dataIndex: 'age',
+        title: 'Quantity',
+        dataIndex: 'Quantity',
         editable:true,
       },
       {
-        title: 'address',
-        dataIndex: 'address',
+        title: 'Description',
+        dataIndex: 'Description',
+        editable:true,
+      },
+      {
+        title:'User',
+        dataIndex: 'User',
         editable:true,
       },
       {
@@ -116,22 +122,17 @@ class AInventory extends React.Component {
       },
     ];
     this.state = {
-      dataSource: [
-        {
-          key: '0',
-          name: 'Edward King 0',
-          age: '32',
-          address: 'London, Park Lane no. 0',
-        },
-        {
-          key: '1',
-          name: 'Edward King 1',
-          age: '32',
-          address: 'London, Park Lane no. 1',
-        },
-      ],
+      dataSource: [],
       count: 2,
     };
+  }
+  componentDidMount(){
+    axios.get('http://localhost:8000/api/inventory_object/')
+    .then(res=>{
+      this.setState({
+        datasource: res.data
+      })
+    })
   }
 
   handleDelete = (key) => {
@@ -144,14 +145,20 @@ class AInventory extends React.Component {
     const { count, dataSource } = this.state;
     const newData = {
       key: count,
-      name: `Edward King ${count}`,
-      age: 32,
-      address: `London, Park Lane no. ${count}`,
+      Name: `Click to Add Inventory Name`,
+      Quantity: 0,
+      Description: `Click to add Description`,
+      User:'Enter User name'
     };
     this.setState({
       dataSource: [...dataSource, newData],
       count: count + 1,
     });
+    axios.post('http://localhost:8000/api/inventory_object/',{newData})
+    .then(res=>{
+      console.log(res);
+      console.log(res.data);
+    })
   };
   handleSave = (row) => {
     const newData = [...this.state.dataSource];

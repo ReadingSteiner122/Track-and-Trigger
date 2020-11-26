@@ -2,6 +2,7 @@ import React from 'react';
 import { Form, Input, Button } from 'antd';
 import 'antd/dist/antd.css';
 import { Link,Route,Switch,Redirect, useHistory } from 'react-router-dom';
+import axios from 'axios';
 
 const { TextArea } = Input;
 const layout = {
@@ -22,6 +23,16 @@ const tailLayout = {
 const NewEntry = (props) => {
     const history=useHistory()
   const onFinish = (values) => {
+    const data={
+      title:values.title,
+      date:values.date,
+      entry:values.entry
+    }
+    axios.post('http://localhost:8000/api/diary/',{data})
+  .then(res=>{
+    console.log(res);
+    console.log(res.data);
+  })
     console.log('Success:', values);
     history.push("/dashboard/notes")
   };
@@ -44,10 +55,12 @@ const NewEntry = (props) => {
       }}
       onFinish={onFinish}
       onFinishFailed={onFinishFailed}
+      
     >
       <Form.Item
         label="Title"
         name="title"
+        
         rules={[
           {
             required: true,
