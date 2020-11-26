@@ -1,6 +1,16 @@
 {% extends 'base_layout.html' %}
 
 {% block body %}
+<ul>
+    {% if user.is_authenticated %}
+       <li><form class="logout-link" action="{% url 'accounts:logout' %}"method="post">
+           {% csrf_token %}
+       <button type="submit">Logout</button>
+       {% else %}
+       <li><a href="{% url 'login' %}">Login</a></li>
+       <li><a href="{% url 'accounts:signup' %}">Sign Up</a></li>
+       {% endif %}
+</ul>
 <h1>Welcome Home</h1>
 {% if user.is_authenticated %}
   <p> Welcome, {{ user.username }} </p>
