@@ -2,6 +2,7 @@ import React from 'react';
 import { Form, Input, Button } from 'antd';
 import 'antd/dist/antd.css';
 import { Link,Route,Switch,Redirect, useHistory } from 'react-router-dom';
+import axios from 'axios';
 
 const { TextArea } = Input;
 const layout = {
@@ -24,6 +25,16 @@ const TNewEntry = (props) => {
   const onFinish = (values) => {
     console.log('Success:', values);
     history.push("/dashboard/to-do")
+    const data={
+      name:values.name,
+      date:values.date,
+      description:values.description,
+      user:values.user,
+    }
+    axios.post('http://localhost:8000/api/todoitem/',data)
+    .then(res=>{
+      console.log(res.data);
+    })
   };
 
   const onFinishFailed = (errorInfo) => {

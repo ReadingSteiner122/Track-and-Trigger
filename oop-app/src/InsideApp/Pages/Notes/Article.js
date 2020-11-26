@@ -1,8 +1,8 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { List, Avatar, Space,Button } from 'antd';
 import { MessageOutlined, LikeOutlined, StarOutlined } from '@ant-design/icons';
 import { useHistory } from 'react-router-dom';
-
+import axios from 'axios';
 
 const listData = [];
 for (let i = 0; i < 23; i++) {
@@ -17,6 +17,7 @@ for (let i = 0; i < 23; i++) {
   });
 }
 
+
 const IconText = ({ icon, text }) => (
   <Space>
     {React.createElement(icon)}
@@ -26,6 +27,13 @@ const IconText = ({ icon, text }) => (
 
 
 const Article = (props) => {
+const [data]=useState([]);
+useEffect(()=>{
+  data= axios.get("http://localhost:8000/api/diary/")
+  .then(res=>{
+    console.log(res.data);
+  })
+});
   const history=useHistory()
     return(
       <div>
@@ -62,10 +70,10 @@ const Article = (props) => {
             >
               <List.Item.Meta
                 avatar={<Avatar src={item.avatar} />}
-                title={<a href={item.href}>{item.title}</a>}
+                title={item.title}
                 description={item.description}
               />
-              {item.content}
+              
             </List.Item>
           )}
         />
