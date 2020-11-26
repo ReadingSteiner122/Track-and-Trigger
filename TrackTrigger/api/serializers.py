@@ -17,10 +17,10 @@ class InventoryObjectSerializer(serializers.ModelSerializer):
         model = InventoryObject
         fields = '__all__'
 
-class ImageObjectSerializer(serializers.Serializer):
-    name = serializers.CharField()
-    image = serializers.ImageField()
-    user = serializers.CharField()
+class ImageObjectSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = ImageObject
+        fields = '__all__'
 
 class ToDoItemSerializer(serializers.ModelSerializer):
     class Meta:
