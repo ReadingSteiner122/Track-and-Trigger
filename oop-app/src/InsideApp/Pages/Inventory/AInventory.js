@@ -123,14 +123,20 @@ class AInventory extends React.Component {
     ];
     this.state = {
       dataSource: [],
-      count: 2,
+      count: 0,
     };
   }
   componentDidMount(){
     axios.get('http://localhost:8000/api/inventory_object/')
     .then(res=>{
+      var arr=[];
+      for(var i=0;i<res.data.length;i++)
+      {
+        arr.push({key:i+1,Name:res.data[i].name,Quantity:res.data[i].quantity,Description:res.data[i].description,User:res.data[i].user})
+      }
+      console.log(arr);
       this.setState({
-        datasource: res.data
+        dataSource: arr
       })
     })
   }

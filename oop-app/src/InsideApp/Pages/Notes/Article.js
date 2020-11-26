@@ -3,8 +3,9 @@ import { List, Avatar, Space,Button } from 'antd';
 import { MessageOutlined, LikeOutlined, StarOutlined } from '@ant-design/icons';
 import { useHistory } from 'react-router-dom';
 import axios from 'axios';
+import {Link} from 'react-router-dom'
 
-const listData = [];
+var listData = [];
 for (let i = 0; i < 23; i++) {
   listData.push({
     href: 'https://ant.design',
@@ -26,15 +27,31 @@ const IconText = ({ icon, text }) => (
 );
 
 
-const Article = (props) => {
-const [data]=useState([]);
-useEffect(()=>{
-  data= axios.get("http://localhost:8000/api/diary/")
+class Article extends React.Component
+{
+  constructor(props)
+  {
+    super(props);
+    this.state={listData:[]}
+  }
+  componentDidUpdate()
+  {
+    axios.get("http://localhost:8000/api/diary/")
   .then(res=>{
     console.log(res.data);
-  })
+    this.setState({listData:res.data})
 });
-  const history=useHistory()
+  }
+ componentDidMount() {
+  axios.get("http://localhost:8000/api/diary/")
+  .then(res=>{
+    console.log(res.data);
+    this.setState({listData:res.data})
+});
+ }
+
+  render()
+  {
     return(
       <div>
         <List
@@ -46,45 +63,30 @@ useEffect(()=>{
             },
             pageSize: 3,
           }}
-          dataSource={listData}
-          footer={
-            <div>
-              <b>ant design</b> footer part
-            </div>
-          }
+          dataSource={this.state.listData}
           renderItem={item => (
             <List.Item
               key={item.title}
-              actions={[
-                <IconText icon={StarOutlined} text="156" key="list-vertical-star-o" />,
-                <IconText icon={LikeOutlined} text="156" key="list-vertical-like-o" />,
-                <IconText icon={MessageOutlined} text="2" key="list-vertical-message" />,
-              ]}
-              extra={
-                <img
-                  width={272}
-                  alt="logo"
-                  src="https://gw.alipayobjects.com/zos/rmsportal/mqaQswcyDLcXyDKnZfES.png"
-                />
-              }
             >
               <List.Item.Meta
-                avatar={<Avatar src={item.avatar} />}
                 title={item.title}
                 description={item.description}
+                date={item.date}
               />
               
             </List.Item>
           )}
         />
-        <Button type="primary" onClick={() => history.push("/dashboard/notes/new")}>
+        <Button type="primary"><Link to="/dashboard/notes/new">
           Add new entry
+          </Link>
         </Button>
       </div>
         
   
   
     )
+            }
 }
 
 export default Article;

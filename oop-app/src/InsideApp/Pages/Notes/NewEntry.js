@@ -3,6 +3,8 @@ import { Form, Input, Button } from 'antd';
 import 'antd/dist/antd.css';
 import { Link,Route,Switch,Redirect, useHistory } from 'react-router-dom';
 import axios from 'axios';
+import { render } from 'react-dom';
+import {withRouter} from 'react-router-dom'
 
 const { TextArea } = Input;
 const layout = {
@@ -20,27 +22,38 @@ const tailLayout = {
   },
 };
 
-const NewEntry = (props) => {
-    const history=useHistory()
-  const onFinish = (values) => {
+class NewEntry extends React.Component
+{
+  constructor(props)
+  {
+    super(props);
+  }
+   
+   onFinish = (values) => {
     const data={
       title:values.title,
-      date:values.date,
-      entry:values.entry
+      description:values.entry,
+      slug:'i-love-shaurya',
+      d_date:values.date,
+      user:15
     }
-    axios.post('http://localhost:8000/api/diary/',{data})
-  .then(res=>{
+    axios.post('http://localhost:8000/api/diary/',data,{
+      headers: {
+        'Content-Type': 'application/json'
+      }
+    })
+    .then(res=>{
     console.log(res);
     console.log(res.data);
   })
-    console.log('Success:', values);
-    history.push("/dashboard/notes")
+    console.log('Success:', data);
+    this.props.history.push("/dashboard/notes")
   };
 
-  const onFinishFailed = (errorInfo) => {
+  onFinishFailed = (errorInfo) => {
     console.log('Failed:', errorInfo);
   };
-
+render(){
   return (
       <div style={{flex:1, alignItems:"center", width:2000, alignContent:"center"}}>
       <div style={{width:500, alignSelf:"center", flex:1, marginLeft:450}}>
@@ -53,8 +66,8 @@ const NewEntry = (props) => {
       initialValues={{
         remember: true,
       }}
-      onFinish={onFinish}
-      onFinishFailed={onFinishFailed}
+      onFinish={this.onFinish}
+      onFinishFailed={this.onFinishFailed}
       
     >
       <Form.Item
@@ -81,7 +94,7 @@ const NewEntry = (props) => {
           },
         ]}
       >
-        <Input />
+        <Input placeholder="DD-MM-YYYY"/>
       </Form.Item>
 
       <Form.Item
@@ -109,6 +122,7 @@ const NewEntry = (props) => {
     </div>
     </div>
   );
+      }
 };
 
-export default NewEntry;
+export default withRouter(NewEntry);
