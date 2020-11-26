@@ -38,7 +38,7 @@ class Article extends React.Component
   {
     axios.get("http://localhost:8000/api/diary/")
   .then(res=>{
-    console.log(res.data);
+    
     this.setState({listData:res.data})
 });
   }
