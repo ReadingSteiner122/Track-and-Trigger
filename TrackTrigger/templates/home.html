@@ -2,7 +2,7 @@
 
 {% block body %}
 <ul>
-{% if user.is_authenticated %}
+    {% if user.is_authenticated %}
        <li><form class="logout-link" action="{% url 'accounts:logout' %}"method="post">
            {% csrf_token %}
        <button type="submit">Logout</button>
