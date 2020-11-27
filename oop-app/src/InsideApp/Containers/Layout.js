@@ -1,4 +1,5 @@
 import React from 'react';
+import {Link} from 'react-router-dom'
 import 'antd/dist/antd.css';
 
 import { Layout, Menu, Breadcrumb } from 'antd';
@@ -11,12 +12,12 @@ const customLayout=(props)=>{
         <Header>
           <div className="logo" />
           <Menu theme="dark" mode="horizontal" defaultSelectedKeys={['2']}>
-            <Menu.Item key="1">Account</Menu.Item>
-            <Menu.Item key="2">Home</Menu.Item>
-            <Menu.Item key="3">Inventory</Menu.Item>
-            <Menu.Item key="4">Diary</Menu.Item>
-            <Menu.Item key="5">Files</Menu.Item>
-            <Menu.Item key="6">To-Do List</Menu.Item>
+            <Link to='/dashboard/account'><Menu.Item key="1">Account</Menu.Item></Link>
+            <Link to='/dashboard'><Menu.Item key="2">Home</Menu.Item></Link>
+            <Link to='/dashboard/inventory'><Menu.Item key="3">Inventory</Menu.Item></Link>
+            <Link to='/dashboard/notes'><Menu.Item key="4">Diary</Menu.Item></Link>
+            <Link to='/dashboard/file'><Menu.Item key="5">Files</Menu.Item></Link>
+            <Link to='/dashboard/to-do'><Menu.Item key="6">To-Do List</Menu.Item></Link>
           </Menu>
         </Header>
         <Content style={{ padding: '0 50px' }}>
