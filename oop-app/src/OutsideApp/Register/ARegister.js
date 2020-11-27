@@ -1,7 +1,8 @@
 import React from 'react';
 import { Form, Input, Button, Checkbox } from 'antd';
 import 'antd/dist/antd.css';
-import { Link,Route,Switch,Redirect, useHistory } from 'react-router-dom';
+import { Link,Route,Switch,Redirect, useHistory, withRouter } from 'react-router-dom';
+import axios from 'axios'
 
 const layout = {
   labelCol: {
@@ -18,16 +19,41 @@ const tailLayout = {
   },
 };
 
-const ARegister = (props) => {
-    const history=useHistory()
-  const onFinish = (values) => {
+class ARegister extends React.Component{
+  constructor(props)
+  {
+    super(props);
+  }
+  onFinish = (values) => {
+    if(values.password!=values.rep)
+    {
+        alert("Password and Re-entered password not the same")
+        this.props.history.push("/register")
+    }
+    if(values.password==values.rep)
+    {
     console.log('Success:', values);
-    history.push("/login")
-  };
+    const data={
+      username:values.username,
+      password:values.password,
+      email:values.email
+    }
+    console.log(data)
+    axios.post("http://127.0.0.1:8000/api/profile/",data,)
+    .then(res=>{
+      console.log("Hello"+res.data)
+    })
+    this.props.history.push("/otp")
+    }
+  }
 
-  const onFinishFailed = (errorInfo) => {
+  onFinishFailed = (errorInfo) => {
     console.log('Failed:', errorInfo);
   };
+
+  render()
+  {
+
 
   return (
       <div style={{flex:1, alignItems:"center", width:2000, alignContent:"center"}}>
@@ -38,8 +64,8 @@ const ARegister = (props) => {
       initialValues={{
         remember: true,
       }}
-      onFinish={onFinish}
-      onFinishFailed={onFinishFailed}
+      onFinish={this.onFinish}
+      onFinishFailed={this.onFinishFailed}
     >
       <Form.Item
         label="Username"
@@ -48,6 +74,18 @@ const ARegister = (props) => {
           {
             required: true,
             message: 'Please input your username!',
+          },
+        ]}
+      >
+        <Input />
+      </Form.Item>
+      <Form.Item
+        label="Email ID"
+        name="email"
+        rules={[
+          {
+            required: true,
+            message: 'Please input your id!',
           },
         ]}
       >
@@ -69,7 +107,7 @@ const ARegister = (props) => {
 
       <Form.Item
         label="Re-enter Password"
-        name="Re-enter Password"
+        name="rep"
         rules={[
           {
             required: true,
@@ -116,5 +154,6 @@ const ARegister = (props) => {
     </div>
   );
 };
+}
 
-export default ARegister;
+export default withRouter(ARegister);

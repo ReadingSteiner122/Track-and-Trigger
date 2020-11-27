@@ -86,11 +86,14 @@ const Alogin = (props) => {
     <br></br>
     <br></br>
     <br></br>
-    <div style={{marginLeft:90,  width:500}}>
-    <Button type="primary">
+    <div style={{marginRight:600,  width:600, justifyContent:"space-evenly", marginLeft:40}}>
+    <Button type="primary" style={{marginRight:50}}>
           Sign Up with Google
         </Button>
-    <Button type="primary" style={{marginLeft:150}}>
+        <Button type="primary" onClick={()=>history.push("/register")} style={{marginRight:50}}>
+          Register
+        </Button>
+    <Button type="primary">
           Sign Up with Facebook
         </Button>
     </div>
