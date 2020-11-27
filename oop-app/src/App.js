@@ -15,7 +15,7 @@ import ForgotPassword1 from "./OutsideApp/ForgotPassword/ForgotPassword1";
 import ForgotPassword2 from "./OutsideApp/ForgotPassword/ForgotPassword2";
 import NewEntry from "./InsideApp/Pages/Notes/NewEntry";
 import { connect } from "react-redux";
-import { fetchUserAction } from './Redux/ActionCreator'
+import { fetchUser } from './Redux/ActionCreator'
 import TNewEntry from "./InsideApp/Pages/ToDo List/TNewEntry";
 import ANewFile from "./InsideApp/Pages/Files/ANewFile";
 import OTP_Form from "./OutsideApp/Register/OTP_Form";
@@ -55,7 +55,7 @@ function App(props) {
 const mapDispatchToProps = (dispatch) => {
   return {
       fetch_user: () => {
-          dispatch(fetchUserAction());
+          dispatch(fetchUser());
       },
   };
 };

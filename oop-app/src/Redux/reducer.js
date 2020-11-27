@@ -1,9 +1,9 @@
-export const reducer = (state = {username:"Shaurya ki jai"}, action) => {
+export const reducer = (state = {user:"Shaurya ki jai"}, action) => {
     console.log(action.payload);
   
     switch (action.type) {
       case "GET_USER":
-        return action.payload || false;
+        return {...state, errMess: null, user: action.payload};
   
       default:
         return state;

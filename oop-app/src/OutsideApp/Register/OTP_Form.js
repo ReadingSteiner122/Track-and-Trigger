@@ -3,6 +3,8 @@ import { Form, Input, Button, Checkbox } from 'antd';
 import 'antd/dist/antd.css';
 import { Link,Route,Switch,Redirect, useHistory, withRouter } from 'react-router-dom';
 import axios from 'axios';
+import { connect } from 'react-redux';
+import {fetchUser} from '../../Redux/ActionCreator'
 
 const layout = {
   labelCol: {
@@ -18,6 +20,10 @@ const tailLayout = {
     span: 16,
   },
 };
+
+const mapDispatchToProps = dispatch => ({
+  fetchUser: (user) => dispatch(fetchUser(user)),
+});
 
 class OTP_Form extends React.Component{
 
@@ -50,6 +56,8 @@ class OTP_Form extends React.Component{
           await axios.post("http://127.0.0.1:8000/api/auth/register",userdata)
           .then(res=>{
               console.log("Posted")
+              console.log(res.data)
+              this.props.fetchUser(res.data.token)
           })
             console.log('Success:', values);
             axios.delete("http://127.0.0.1:8000/api/profile/"+this.state.data[0].id,userdata)
@@ -103,4 +111,4 @@ class OTP_Form extends React.Component{
 };
 
 
-export default withRouter(OTP_Form);
+export default withRouter(connect(null, mapDispatchToProps)(OTP_Form));

@@ -5,8 +5,14 @@ import {useDropzone} from 'react-dropzone'
 import Dropzone from 'react-dropzone'
 import axios from 'axios'
 import {Link} from 'react-router-dom'
+import {connect} from 'react-redux'
 
 const { Meta } = Card;
+
+function mapStateToProps({ auth }) {
+    console.log(auth)
+    return { auth };
+}
 
 class AFile extends React.Component
 {
@@ -14,12 +20,23 @@ class AFile extends React.Component
     {
         super(props);
         this.state={
-            data:[]
+            data:[],
+            user:null
         }
         
     }
     
     componentDidMount(){
+        console.log(this.props.auth.user)
+        axios.get('http://127.0.0.1:8000/api/auth/user',{
+            headers:{
+                'Authorization': 'Token '+this.props.auth.user
+            }
+        })
+        .then(res=>{
+            console.log(res.data)
+            this.setState({user:res.data})
+        })
         axios.get('http://127.0.0.1:8000/api/image_object/')
         .then(res=>{
             console.log(res.data);
@@ -63,7 +80,7 @@ class AFile extends React.Component
         }
     
 
-export default AFile
+export default connect(mapStateToProps)(AFile)
 
 /*
 

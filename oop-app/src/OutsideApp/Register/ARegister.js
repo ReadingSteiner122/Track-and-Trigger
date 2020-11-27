@@ -3,6 +3,8 @@ import { Form, Input, Button, Checkbox } from 'antd';
 import 'antd/dist/antd.css';
 import { Link,Route,Switch,Redirect, useHistory, withRouter } from 'react-router-dom';
 import axios from 'axios'
+import { connect } from 'react-redux';
+import {fetchUser} from '../../Redux/ActionCreator'
 
 const layout = {
   labelCol: {
@@ -18,6 +20,10 @@ const tailLayout = {
     span: 16,
   },
 };
+
+const mapDispatchToProps = dispatch => ({
+  fetchUser: (user) => dispatch(fetchUser(user)),
+});
 
 class ARegister extends React.Component{
   constructor(props)
@@ -156,4 +162,4 @@ class ARegister extends React.Component{
 };
 }
 
-export default withRouter(ARegister);
+export default withRouter(connect(null, mapDispatchToProps)(ARegister));

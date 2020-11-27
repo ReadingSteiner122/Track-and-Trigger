@@ -4,6 +4,7 @@ import { MessageOutlined, LikeOutlined, StarOutlined } from '@ant-design/icons';
 import { useHistory } from 'react-router-dom';
 import axios from 'axios';
 import {Link} from 'react-router-dom'
+import {connect} from 'react-redux'
 
 
 var listData = [];
@@ -29,6 +30,11 @@ const IconText = ({ icon, text }) => (
   </Space>
 );
 
+function mapStateToProps({ auth }) {
+  console.log(auth)
+  return { auth };
+}
+
 
 
 class Article extends React.Component
@@ -47,10 +53,23 @@ class Article extends React.Component
 });
   }
  componentDidMount() {
+  axios.get('http://127.0.0.1:8000/api/auth/user',{
+    headers:{
+        'Authorization': 'Token '+this.props.auth.user
+    }
+      })
+      .then(res=>{
+        console.log(res.data)
+        this.setState({user:res.data})
+      })
   axios.get("http://localhost:8000/api/diary/")
   .then(res=>{
     console.log(res.data);
-    this.setState({listData:res.data})
+    for(var i=0;i<res.data.length;i++)
+    {
+    if(this.state.user.id==res.data[i].user)
+      this.setState({listData:[...this.state.listData, res.data[i]]})
+    }
 });
  }
 
@@ -97,4 +116,4 @@ class Article extends React.Component
             }
 }
 
-export default Article;
+export default connect(mapStateToProps)(Article);

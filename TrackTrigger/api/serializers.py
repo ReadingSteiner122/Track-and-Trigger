@@ -75,9 +75,9 @@ class ProfileSerializer(serializers.ModelSerializer):
 
   def create(self, validated_data):
     email = validated_data['email']
-    is_valid = validate_email(email_address=email, check_regex=True, check_mx=True, from_address='kar.nadimpalli11@gmail.com', helo_host='my.host.name', smtp_timeout=10, dns_timeout=10, use_blacklist=True, debug=False)
-    if is_valid :
-      profile = ProfileOTP.objects.create(**validated_data)
+    #is_valid = validate_email(email_address=email, check_regex=True, check_mx=True, from_address='kar.nadimpalli11@gmail.com', helo_host='my.host.name', smtp_timeout=10, dns_timeout=10, use_blacklist=True, debug=False)
+    #if is_valid :
+    profile = ProfileOTP.objects.create(**validated_data)
     email = validated_data['email']
     otp = profile.otp
     htmly = get_template('api/Email1.html')

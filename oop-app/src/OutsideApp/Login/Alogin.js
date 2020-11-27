@@ -2,6 +2,9 @@ import React from 'react';
 import { Form, Input, Button, Checkbox } from 'antd';
 import 'antd/dist/antd.css';
 import { Link,Route,Switch,Redirect, useHistory,withRouter } from 'react-router-dom';
+import { connect } from 'react-redux';
+import {fetchUser} from '../../Redux/ActionCreator'
+import axios from 'axios';
 
 const layout = {
   labelCol: {
@@ -18,14 +21,32 @@ const tailLayout = {
   },
 };
 
+const mapDispatchToProps = dispatch => ({
+  fetchUser: (user) => dispatch(fetchUser(user)),
+});
+
 class Alogin extends React.Component {
   constructor(props){
     super(props);
+    this.state={
+      username:null,
+      password:null
+    }
   }
   
   onFinish = (values) => {
+    this.setState({username:values.username, password:values.password})
+    const data={
+      username:this.state.username,
+      password:this.state.password
+    }
+    axios.post("http://127.0.0.1:8000/api/auth/login",data)
+    .then(res=>{
+      console.log(res.data)
+      this.props.fetchUser(res.data.token)
+      this.props.history.push("/dashboard")
+    })
     console.log('Success:', values);
-    this.props.history.push("/dashboard")
   };
 
   onFinishFailed = (errorInfo) => {
@@ -108,4 +129,4 @@ class Alogin extends React.Component {
   }
 };
 
-export default withRouter(Alogin);
+export default connect(null, mapDispatchToProps)(withRouter(Alogin))
