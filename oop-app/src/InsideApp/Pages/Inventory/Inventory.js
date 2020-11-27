@@ -10,7 +10,7 @@ class Inventory extends React.Component{
         return(
             <div>
                 <Layout>
-                <div>
+                <div className="content">
                     <AInventory />
                 </div>
                 </Layout>

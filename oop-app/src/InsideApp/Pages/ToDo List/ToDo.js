@@ -9,7 +9,7 @@ class ToDo extends React.Component{
         return(
             <div>
                 <Layout>
-                <div>
+                <div className="content">
                 <AToDo />
                 </div>
                 </Layout>

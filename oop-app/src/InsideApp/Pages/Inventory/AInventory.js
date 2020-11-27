@@ -248,7 +248,7 @@ class AInventory extends React.Component {
         >
           Add a row
         </Button>
-        <div style={{marginLeft:250, marginRight:50}}>
+        <div style={{}}>
         <Table
           components={components}
           rowClassName={() => 'editable-row'}

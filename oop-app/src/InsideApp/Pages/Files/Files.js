@@ -8,11 +8,11 @@ import AFile from './AFile'
 class Files extends React.Component{
     render(){
         return(
-            <div>
-                <Layout>
+            <Layout>
+            <div className="content">
                     <AFile />
-                </Layout>
             </div>
+            </Layout>
         )
     }
 }

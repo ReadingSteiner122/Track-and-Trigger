@@ -1,6 +1,8 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import 'antd/dist/antd.css';
+import {Link} from 'react-router-dom'
+import {withRouter} from 'react-router-dom'
 
 import { Layout, Menu } from 'antd';
 import {
@@ -34,14 +36,29 @@ class customLayout extends React.Component {
         <Sider trigger={null} collapsible collapsed={this.state.collapsed}>
           <div className="logo" />
           <Menu theme="dark" mode="inline" defaultSelectedKeys={['1']}>
-            <Menu.Item key="1" icon={<UserOutlined />}>
-              nav 1
+            <Menu.Item key="1" ><Link to="/dashboard">
+              Home
+              </Link>
             </Menu.Item>
-            <Menu.Item key="2" icon={<VideoCameraOutlined />}>
-              nav 2
+            <Menu.Item key="2" icon={<UserOutlined />}><Link to="/dashboard/account">
+              Account
+              </Link>
             </Menu.Item>
-            <Menu.Item key="3" icon={<UploadOutlined />}>
-              nav 3
+            <Menu.Item key="3" icon={<UploadOutlined />}><Link to="/dashboard/inventory">
+              Inventory
+              </Link>
+            </Menu.Item>
+            <Menu.Item key="4" icon={<UploadOutlined />}><Link to="/dashboard/to-do">
+              To-Do List
+              </Link>
+            </Menu.Item>
+            <Menu.Item key="5" icon={<UploadOutlined />}><Link to="/dashboard/notes">
+              Diary
+              </Link>
+            </Menu.Item>
+            <Menu.Item key="6" icon={<UploadOutlined />}><Link to="/dashboard/file">
+              Image Upload
+              </Link>
             </Menu.Item>
           </Menu>
         </Sider>
