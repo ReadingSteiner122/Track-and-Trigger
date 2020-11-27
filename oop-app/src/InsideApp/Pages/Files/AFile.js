@@ -29,31 +29,34 @@ class AFile extends React.Component
     render()
     {
         return (
-                <div className="site-card-wrapper">
-                    <Row gutter={16}>
-                   { this.state.data.map((item,index)=>{
-                        if((index+1)%3==0)
-                        {
-                        <Col span={8}>
-                       {this.state.data.map((item,index)=>{
-                           return (
+            <div className="site-card-wrapper">
+                <Row>
 
-                        <Card
-                            hoverable
-                            style={{ width: 240 }}
-                            cover={<img alt="example" src={item.image} />}
-                            key={index}>
-                            <Meta title={item.name}  />
-                            </Card>
-                        )} )
-                           } </Col>}})}
-                            </Row>
 
-                    <Link to = '/dashboard/file/new'><Button style={{marginTop:10}}>Upload image</Button></Link>
-                </div>
-                )
-        }
+                   {this.state.data.map((item,index)=>{
+                       return (
+                    <div key={index} style={{margin:65}}>        
+                    <Card
+                        hoverable
+                        style={{ width: 240}}
+                        cover={<img alt="example" src={item.image} />}
+                        key={index}>
+                        <Meta title={item.name}  />
+                        </Card>
+                    </div>
+                    )} )
+                       } 
+                </Row>
+
+                <Link to = '/dashboard/file/new'><Button style={{marginTop:10}}>Upload image</Button></Link>
+            </div>
+            )
     }
+        }
+    
 
 export default AFile
 
+/*
+
+ */
