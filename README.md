@@ -11,6 +11,9 @@
  7. pip install django-rest-knox
  8. pip install py3-validate-email
 
+ python manage.py makemigrations
+ python manage.py migrate
+
  9.  npm install
  10. npm install antd
  11. npm install react-router-dom
