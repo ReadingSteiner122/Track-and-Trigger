@@ -19,6 +19,8 @@ import { fetchUserAction } from './Redux/ActionCreator'
 import TNewEntry from "./InsideApp/Pages/ToDo List/TNewEntry";
 import ANewFile from "./InsideApp/Pages/Files/ANewFile";
 import OTP_Form from "./OutsideApp/Register/OTP_Form";
+import DeleteFile from "./InsideApp/Pages/Files/DeleteFile";
+
 
 function App(props) {
   useEffect(() => {
@@ -43,6 +45,7 @@ function App(props) {
       <Route exact path="/dashboard/to-do/new"><TNewEntry /></Route>
       <Route exact path="/dashboard/file/new"><ANewFile/></Route>
       <Route exact path="/otp"><OTP_Form /></Route>
+      <Route exact path="/dashboard/file/delete"><DeleteFile/></Route>
     </div>
     </Router>
     
