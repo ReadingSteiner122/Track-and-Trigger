@@ -165,10 +165,11 @@ class AInventory extends React.Component {
   handleAdd = () => {
     const { count, dataSource } = this.state;
     const newData = {
-      name: `Click to Add Inventory Object Name`,
+      name: "Add object",
       quantity: 0,
-      description: `Click to add Description`,
-      user:7
+      description: 'Click to add Description',
+      user:7,
+     
     };
     this.setState({
       dataSource: [...dataSource, newData],
