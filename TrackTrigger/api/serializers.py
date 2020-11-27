@@ -6,6 +6,8 @@ from django.core.mail import send_mail
 from django.core.mail import EmailMultiAlternatives
 from django.template.loader import get_template
 from django.template import Context
+from validate_email import validate_email
+from rest_framework.response import Response
 
 
 class UserSerializer(serializers.ModelSerializer):
@@ -72,14 +74,22 @@ class ProfileSerializer(serializers.ModelSerializer):
     fields = '__all__'
 
   def create(self, validated_data):
+    email = validated_data['email']
+    is_valid = validate_email(email_address=email, check_regex=True, check_mx=True, from_address='kar.nadimpalli11@gmail.com', helo_host='my.host.name', smtp_timeout=10, dns_timeout=10, use_blacklist=True, debug=False)
+    if is_valid :
       profile = ProfileOTP.objects.create(**validated_data)
-      email = validated_data['email']
-      otp = profile.otp
-      htmly = get_template('api/Email1.html')
-      d = { 'otp':otp }
-      subject, from_email, to = 'OTP for App', 'salilsanat@gmail.com', email
-      html_content = htmly.render(d)
-      msg = EmailMultiAlternatives(subject, html_content, from_email, [to])
-      msg.attach_alternative(html_content, "text / html")
-      msg.send()
-      return profile
+    email = validated_data['email']
+    otp = profile.otp
+    htmly = get_template('api/Email1.html')
+    d = { 'otp':otp }
+    subject, from_email, to = 'OTP for App', 'salilsanat@gmail.com', email
+    html_content = htmly.render(d)
+
+    msg = EmailMultiAlternatives(subject, html_content, from_email, [to])
+    msg.attach_alternative(html_content, "text / html")
+    msg.send()
+    return profile
+
+
+
+
