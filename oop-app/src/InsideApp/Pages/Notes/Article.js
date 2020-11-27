@@ -5,6 +5,7 @@ import { useHistory } from 'react-router-dom';
 import axios from 'axios';
 import {Link} from 'react-router-dom'
 
+
 var listData = [];
 for (let i = 0; i < 23; i++) {
   listData.push({
@@ -19,12 +20,15 @@ for (let i = 0; i < 23; i++) {
 }
 
 
+
+
 const IconText = ({ icon, text }) => (
   <Space>
     {React.createElement(icon)}
     {text}
   </Space>
 );
+
 
 
 class Article extends React.Component
@@ -65,19 +69,23 @@ class Article extends React.Component
           }}
           dataSource={this.state.listData}
           renderItem={item => (
+            <div>
             <List.Item
               key={item.title}
             >
               <List.Item.Meta
                 title={item.title}
                 description={item.description}
-                date={item.date}
+                avatar={item.d_date}
               />
               
             </List.Item>
+            <hr style={{color:"black"}} />
+            </div>
           )}
+
         />
-        <Button type="primary"><Link to="/dashboard/notes/new">
+        <Button type="primary" style={{marginBottom:100}}><Link to="/dashboard/notes/new">
           Add new entry
           </Link>
         </Button>
