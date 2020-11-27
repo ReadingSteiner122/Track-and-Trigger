@@ -3,7 +3,7 @@ import {withRouter} from 'react-router-dom'
 import Dropzone from 'react-dropzone'
 import axios from 'axios'
 import { Form, Input,Button } from 'antd'
-
+import DragAndDrop from "./DragAndDrop"
 const layout = {
     labelCol: {
       span: 8,
@@ -27,21 +27,20 @@ class ANewFile extends React.Component{
             id:null,
             name:null,
             file:null,
-            user:null
+            user:null,
+            image:null,
+            files:[]
         }
     }
    onFinish = async (values) => {
     console.log(this.state.file)
+    var FormData = require('form-data');
     var fd=new FormData();
     await fd.append("name",values.name)
     await fd.append("user",15)
-    await fd.append('image', {uri: this.state.file[0].path, name: this.state.file[0].name, filename :'imageName.png',type: this.state.file[0].type});
+    await fd.append('image', this.state.image, this.state.image.name);
     await console.log(fd)
-    const data={
-      name:values.name,
-      file:fd,
-      user:15
-    }
+
     axios.post('http://localhost:8000/api/image_object/',fd,{
         headers:{
             'Content-Type':"multipart/form-data"
@@ -51,14 +50,26 @@ class ANewFile extends React.Component{
     console.log(res);
     console.log(res.data);
   })
-    console.log('Success:', data);
+    console.log('Success:', fd);
     this.props.history.push("/dashboard/file")
   };
 
   onFinishFailed = (errorInfo) => {
     console.log('Failed:', errorInfo);
   };
-  
+  handleImageChange = async (e) => {
+    await this.setState({
+      image: e.target.files[0]
+    })
+    await console.log(this.state.image)
+  };
+  handleDrop = (files) => {
+    console.log(files)
+    this.setState({image:files[0],files:files[0]})
+  }
+
+
+
 render(){
   return (
       <div style={{flex:1, alignItems:"center", width:2000, alignContent:"center"}}>
@@ -90,25 +101,27 @@ render(){
         <Input />
       </Form.Item>
 
-      <Dropzone onDrop={acceptedFiles => {this.setState({file:acceptedFiles})}}>
-                        {({getRootProps, getInputProps}) => (
-                            <section>
-                            <div {...getRootProps()} style={{marginLeft:150}}>
-                                <input {...getInputProps()} />
-                                <p style={{height:40,alignItems:'center'}}>Drag 'n' drop some files here, or click to select files</p>
-                            </div>
-                            </section>
-                        )}
-        </Dropzone>
 
 
+<DragAndDrop handleDrop={this.handleDrop}>
+
+
+
+        <div style={{height: 300, width: 250}}>
+
+            <div >{this.state.files.name}</div>
+
+        </div>
+      </DragAndDrop>
       <Form.Item {...tailLayout}>
         <Button type="primary" htmlType="submit">
           Submit
         </Button>
       </Form.Item>
     </Form>
+
     </div>
+
     </div>
   );
       }
