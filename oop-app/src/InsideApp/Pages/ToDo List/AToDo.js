@@ -166,7 +166,7 @@ class AToDo extends React.Component {
   handleAdd = () => {
     const { count, dataSource } = this.state;
     const newData = {
-      name: `Click to Add To Do Item Name`,
+      name: "Add ToDo item",
       date: '2020-11-29',
       description: `Click to add Description`,
       user:7
