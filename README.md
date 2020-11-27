@@ -7,6 +7,13 @@
  3. Some Bootstrap css files
  4. Django Rest Framework (pip install djangorestframework)
  5. Markdown (pip install markdown)
+ 6. pip install django-cors-headers 
+ 7. pip install django-rest-knox
+ 8. pip install py3-validate-email
+
+ 9.  npm install
+ 10. npm install antd
+ 11. npm install react-router-dom
  That's about it.
  # How to Run
  If you want to run the app on your localhost server, run the command python manage.py runserver within the TrackTrigger directory.  
