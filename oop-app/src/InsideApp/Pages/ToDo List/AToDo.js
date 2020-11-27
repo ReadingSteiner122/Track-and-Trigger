@@ -96,7 +96,7 @@ class AToDo extends React.Component {
         editable: true,
       },
       {
-        title: 'Date',
+        title: 'Completion Date',
         dataIndex: 'date',
         editable:true,
       },

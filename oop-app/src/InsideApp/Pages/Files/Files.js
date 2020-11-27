@@ -1,6 +1,6 @@
 import React from 'react'
-import '../../Style.css'
 
+import 'antd/dist/antd.css';
 import Layout from '../../Containers/Layout'
 import FileList from '../../Containers/ListView'
 import AFile from './AFile'

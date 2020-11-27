@@ -1,19 +1,20 @@
 import React from 'react'
-import '../../Style.css'
+
 import Button from 'antd'
-import Navbar from '../../Navbar'
-import Header from '../../Header'
+import Layout from '../../Containers/Layout'
 import Article from './Article';
+import 'antd/dist/antd.css';
 
 class Notes extends React.Component{
     render(){
         return(
             <div>
-                <Navbar/>
-                <Header/>
-                <div className="content">
+                <Layout>
+                <div >
                     <Article/>
                 </div>
+                </Layout>
+
             </div>
         )
     }

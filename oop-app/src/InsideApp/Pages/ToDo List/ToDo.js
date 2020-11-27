@@ -1,20 +1,19 @@
 import React from 'react'
-import '../../Style.css'
+import 'antd/dist/antd.css';
+import Layout from '../../Containers/Layout'
 
-import Navbar from '../../Navbar'
-import Header from '../../Header'
-import Content from '../../Content'
 import AToDo from './AToDo'
 
 class ToDo extends React.Component{
     render(){
         return(
             <div>
-                <Navbar/>
-                <Header/>
+                <Layout>
                 <div>
-                    <AToDo />
+                <AToDo />
                 </div>
+                </Layout>
+
             </div>
         )
     }   
