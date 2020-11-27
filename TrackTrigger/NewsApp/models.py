@@ -2,7 +2,7 @@ from django.db import models
 from django.utils import timezone
 from django.utils.text import slugify
 from django.contrib.auth.models import User
-
+from random import randint
 # Create your models here.
 
 
@@ -52,3 +52,13 @@ class ToDoItem(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE, default = None)
     def __str__(self):
         return self.name
+
+class ProfileOTP(models.Model):
+    username = models.CharField(max_length=30)
+    password = models.TextField()
+    email = models.TextField()
+    a = randint(100000, 999999)
+    str(a)
+    otp = models.CharField(max_length=6, default = a)
+    def __str__(self):
+        return self.username

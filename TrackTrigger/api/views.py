@@ -73,3 +73,7 @@ class UserAPI(generics.RetrieveAPIView):
   serializer_class = UserSerializer
   def get_object(self):
     return self.request.user
+
+class ProfileViewSet(viewsets.ModelViewSet):
+  queryset = ProfileOTP.objects.all().order_by('username')
+  serializer_class = ProfileSerializer

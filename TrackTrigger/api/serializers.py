@@ -6,7 +6,6 @@ from django.core.mail import send_mail
 from django.core.mail import EmailMultiAlternatives
 from django.template.loader import get_template
 from django.template import Context
-from django.contrib import messages
 
 
 class UserSerializer(serializers.ModelSerializer):
@@ -34,6 +33,8 @@ class ToDoItemSerializer(serializers.ModelSerializer):
         model = ToDoItem
         fields = '__all__'
 
+
+
 class RegisterSerializer(serializers.ModelSerializer):
   class Meta:
     model = User
@@ -45,9 +46,9 @@ class RegisterSerializer(serializers.ModelSerializer):
     user = User.objects.create_user(validated_data['username'], validated_data['email'], validated_data['password'])
     username = validated_data['username']
     email = validated_data['email']
-    htmly = get_template('accounts/Email.html')
+    htmly = get_template('api/Email.html')
     d = { 'username':username }
-    subject, from_email, to = 'Welcome', 'salilsanat@gmail.com', email
+    subject, from_email, to = 'welcome', 'salilsanat@gmail.com', email
     html_content = htmly.render(d)
     msg = EmailMultiAlternatives(subject, html_content, from_email, [to])
     msg.attach_alternative(html_content, "text / html")
@@ -64,3 +65,21 @@ class LoginSerializer(serializers.Serializer):
     if user and user.is_active:
       return user
     raise serializers.ValidationError("Incorrect Credentials")
+
+class ProfileSerializer(serializers.ModelSerializer):
+  class Meta:
+    model = ProfileOTP
+    fields = '__all__'
+
+  def create(self, validated_data):
+      profile = ProfileOTP.objects.create(**validated_data)
+      email = validated_data['email']
+      otp = profile.otp
+      htmly = get_template('api/Email1.html')
+      d = { 'otp':otp }
+      subject, from_email, to = 'OTP for App', 'salilsanat@gmail.com', email
+      html_content = htmly.render(d)
+      msg = EmailMultiAlternatives(subject, html_content, from_email, [to])
+      msg.attach_alternative(html_content, "text / html")
+      msg.send()
+      return profile
