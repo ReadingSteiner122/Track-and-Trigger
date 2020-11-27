@@ -11,6 +11,10 @@ import {
   UserOutlined,
   VideoCameraOutlined,
   UploadOutlined,
+  FileOutlined,
+  CheckOutlined,
+  LogoutOutlined,
+  ContainerOutlined
 } from '@ant-design/icons';
 
 const { Header, Sider, Content } = Layout;
@@ -19,6 +23,9 @@ class customLayout extends React.Component {
   constructor(props)
   {
     super(props);
+    this.state={
+      id:1
+    }
   }
   state = {
     collapsed: false,
@@ -44,15 +51,15 @@ class customLayout extends React.Component {
               Account
               </Link>
             </Menu.Item>
-            <Menu.Item key="3" icon={<UploadOutlined />}><Link to="/dashboard/inventory">
+            <Menu.Item key="3" icon={<ContainerOutlined />}><Link to="/dashboard/inventory">
               Inventory
               </Link>
             </Menu.Item>
-            <Menu.Item key="4" icon={<UploadOutlined />}><Link to="/dashboard/to-do">
+            <Menu.Item key="4" icon={<CheckOutlined />}><Link to="/dashboard/to-do">
               To-Do List
               </Link>
             </Menu.Item>
-            <Menu.Item key="5" icon={<UploadOutlined />}><Link to="/dashboard/notes">
+            <Menu.Item key="5" icon={<FileOutlined />}><Link to="/dashboard/notes">
               Diary
               </Link>
             </Menu.Item>
@@ -60,10 +67,14 @@ class customLayout extends React.Component {
               Image Upload
               </Link>
             </Menu.Item>
+            <Menu.Item key="7" icon={<LogoutOutlined />}><Link to="/">
+              Logout
+              </Link>
+            </Menu.Item>
           </Menu>
         </Sider>
         <Layout className="site-layout">
-          <Header className="site-layout-background" style={{ padding: 0 }}>
+          <Header className="site-layout-background" style={{ padding: 0, backgroundColor:"white" }}>
             {React.createElement(this.state.collapsed ? MenuUnfoldOutlined : MenuFoldOutlined, {
               className: 'trigger',
               onClick: this.toggle,

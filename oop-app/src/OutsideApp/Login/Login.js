@@ -11,10 +11,10 @@ class Login extends React.Component{
     render(){
         return(
             <div>
-                <div className="h">
+                <div className="h" >
                     <LogoName/>
                     </div>
-                    <div>
+                    <div >
                         <Alogin />
                     </div>
             </div>
