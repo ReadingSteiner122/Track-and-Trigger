@@ -26,6 +26,13 @@ class AFile extends React.Component
             this.setState({data:res.data});
         }) 
     }
+    componentDidUpdate(){
+        axios.get('http://127.0.0.1:8000/api/image_object/')
+        .then(res=>{
+            
+            this.setState({data:res.data});
+        }) 
+    }
     render()
     {
         return (
@@ -49,6 +56,7 @@ class AFile extends React.Component
                 </Row>
 
                 <Link to = '/dashboard/file/new'><Button style={{marginTop:10}}>Upload image</Button></Link>
+                <Link to = '/dashboard/file/delete'><Button style={{marginTop:10}}>Delete image</Button></Link>
             </div>
             )
     }

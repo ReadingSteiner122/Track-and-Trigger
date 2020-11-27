@@ -1,7 +1,7 @@
 import React from 'react';
 import { Form, Input, Button, Checkbox } from 'antd';
 import 'antd/dist/antd.css';
-import { Link,Route,Switch,Redirect, useHistory } from 'react-router-dom';
+import { Link,Route,Switch,Redirect, useHistory,withRouter } from 'react-router-dom';
 
 const layout = {
   labelCol: {
@@ -18,16 +18,21 @@ const tailLayout = {
   },
 };
 
-const Alogin = (props) => {
-    const history=useHistory()
-  const onFinish = (values) => {
+class Alogin extends React.Component {
+  constructor(props){
+    super(props);
+  }
+  
+  onFinish = (values) => {
     console.log('Success:', values);
-    history.push("/dashboard")
+    this.props.history.push("/dashboard")
   };
 
-  const onFinishFailed = (errorInfo) => {
+  onFinishFailed = (errorInfo) => {
     console.log('Failed:', errorInfo);
   };
+
+  render(){
 
   return (
       <div style={{flex:1, alignItems:"center", width:2000, alignContent:"center"}}>
@@ -38,8 +43,8 @@ const Alogin = (props) => {
       initialValues={{
         remember: true,
       }}
-      onFinish={onFinish}
-      onFinishFailed={onFinishFailed}
+      onFinish={this.onFinish}
+      onFinishFailed={this.onFinishFailed}
     >
       <Form.Item
         label="Username"
@@ -77,7 +82,7 @@ const Alogin = (props) => {
         </Button>
       </Form.Item>
     </Form>
-    <div style={{marginLeft:450}} onClick={() => history.push("/forgot1")}>
+    <div style={{marginLeft:450}} onClick={() => this.props.history.push("/forgot1")}>
     <Button type="primary">
           Forgot Password
         </Button>
@@ -90,7 +95,7 @@ const Alogin = (props) => {
     <Button type="primary" style={{marginRight:50}}>
           Sign Up with Google
         </Button>
-        <Button type="primary" onClick={()=>history.push("/register")} style={{marginRight:50}}>
+        <Button type="primary" onClick={()=>this.props.history.push("/register")} style={{marginRight:50}}>
           Register
         </Button>
     <Button type="primary">
@@ -99,7 +104,8 @@ const Alogin = (props) => {
     </div>
     </div>
     </div>
-  );
+   );
+  }
 };
 
-export default Alogin;
+export default withRouter(Alogin);
