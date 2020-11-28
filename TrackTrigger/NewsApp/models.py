@@ -63,6 +63,7 @@ class ProfileOTP(models.Model):
     username = models.CharField(max_length=30)
     password = models.TextField()
     email = models.TextField()
+    phone = models.CharField(max_length=30)
     a = randint(100000, 999999)
     str(a)
     otp = models.CharField(max_length=6, default = a)
