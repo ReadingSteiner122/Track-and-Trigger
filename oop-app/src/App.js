@@ -24,7 +24,7 @@ import DeleteFile from "./InsideApp/Pages/Files/DeleteFile";
 
 function App(props) {
   useEffect(() => {
-    props.fetch_user();
+
 }, []);
   return (
     <Router>
@@ -61,4 +61,3 @@ const mapDispatchToProps = (dispatch) => {
 };
 
 export default connect(null, mapDispatchToProps)(App);
-

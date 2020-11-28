@@ -3,28 +3,34 @@ import ReactDOM from 'react-dom';
 import './index.css';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
-import { Provider } from "react-redux";
-import { createStore, combineReducers, compose, applyMiddleware } from "redux";
-import thunk from "redux-thunk";
-import { reducer } from "./Redux/reducer";
+import { Provider as ReduxProvider } from "react-redux";
+import { createStore } from 'redux'
+import { persistStore, persistReducer } from 'redux-persist'
+import storage from 'redux-persist/lib/storage' 
+import { PersistGate } from 'redux-persist/integration/react'
+import {reducer} from "./Redux/reducer"
 
 // If you want to start measuring performance in your app, pass a function
 // to log results (for example: reportWebVitals(console.log))
 // or send to an analytics endpoint. Learn more: https://bit.ly/CRA-vitals
+const persistConfig = {
+    key: 'root',
+    storage,
+  }
+  const persistedReducer = persistReducer(persistConfig, reducer)
 
-const composeEnhancers = window._REDUX_DEVTOOLS_EXTENSION_COMPOSE_ || compose;
-const rootReducer = combineReducers({
-    auth: reducer,
-});
-const store = createStore(
-    rootReducer,
-    composeEnhancers(applyMiddleware(thunk))
-);
+
+const reduxStore = createStore(persistedReducer);
+const persistor = persistStore(reduxStore)
+
 
 ReactDOM.render(
-    <Provider store={store}>
+    <ReduxProvider store={reduxStore}>
+      <PersistGate loading={null} persistor={persistor}>
+
         <App />
-    </Provider>,
+    </PersistGate>
+    </ReduxProvider>,
     document.getElementById("root")
 );
 

@@ -3,7 +3,7 @@ export const reducer = (state = {user:"Shaurya ki jai"}, action) => {
   
     switch (action.type) {
       case "GET_USER":
-        return {...state, errMess: null, user: action.payload};
+        return {...state, errMess: null, token: action.payload};
   
       default:
         return state;
