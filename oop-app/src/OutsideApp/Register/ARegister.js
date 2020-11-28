@@ -30,7 +30,7 @@ class ARegister extends React.Component{
   {
     super(props);
   }
-  onFinish = (values) => {
+  onFinish = async (values) => {
     if(values.password!=values.rep)
     {
         alert("Password and Re-entered password not the same")
@@ -42,14 +42,15 @@ class ARegister extends React.Component{
     const data={
       username:values.username,
       password:values.password,
-      email:values.email
+      email:values.email,
+      phone:values.phoneno
     }
     console.log(data)
-    axios.post("http://127.0.0.1:8000/api/profile/",data,)
+    await axios.post("http://127.0.0.1:8000/api/profile/",data,)
     .then(res=>{
       console.log("Hello"+res.data)
+      this.props.history.push("/otp")
     })
-    this.props.history.push("/otp")
     }
   }
 

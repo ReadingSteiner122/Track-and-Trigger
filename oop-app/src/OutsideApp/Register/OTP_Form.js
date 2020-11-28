@@ -30,14 +30,17 @@ class OTP_Form extends React.Component{
     constructor(props)
     {
         super(props);
-        this.state={data:[]}
+        this.state={data:[],
+          user:null,
+          phoneno:null
+        }
     }   
    
   onFinish = async (values) => {
       await axios.get("http://127.0.0.1:8000/api/profile/")
       .then(res=>{
           console.log("gotten"+res)
-          this.setState({data:res.data})
+          this.setState({data:res.data, phoneno:res.data[0].phone})
       })
       console.log("put into data"+this.state.data)
       if(this.state.data[0].otp!=values.otp)
@@ -58,7 +61,14 @@ class OTP_Form extends React.Component{
               console.log("Posted")
               console.log(res.data)
               this.props.fetchUser(res.data.token)
+              this.setState({user:res.data.user})
           })
+          const phone_data={
+            user:this.state.user.id,
+            number:this.state.phoneno
+          }
+          console.log(phone_data)
+          await axios.post("http://127.0.0.1:8000/api/phone/",phone_data)
             console.log('Success:', values);
             axios.delete("http://127.0.0.1:8000/api/profile/"+this.state.data[0].id,userdata)
             .then(res=>{
