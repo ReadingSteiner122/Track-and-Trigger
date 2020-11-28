@@ -12,6 +12,7 @@ router.register(r'inventory_object', views.InventoryObjectViewSet)
 router.register(r'todoitem', views.ToDoItemViewSet)
 router.register(r'image_object', views.ImageObjectViewSet)
 router.register(r'profile', views.ProfileViewSet)
+router.register(r'phone', views.PhoneNumberStringViewSet)
 
 # Wire up our API using automatic URL routing.
 # Additionally, we include login URLs for the browsable API.

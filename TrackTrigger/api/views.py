@@ -39,6 +39,10 @@ class ToDoItemViewSet(viewsets.ModelViewSet):
     queryset = ToDoItem.objects.all().order_by('name')
     serializer_class = ToDoItemSerializer
 
+class PhoneNumberStringViewSet(viewsets.ModelViewSet):
+    queryset = PhoneNumberString.objects.all().order_by('number')
+    serializer_class = PhoneNumberStringSerializer
+
 # Register API
 class RegisterAPI(generics.GenericAPIView):
   serializer_class = RegisterSerializer

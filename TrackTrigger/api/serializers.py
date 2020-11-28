@@ -34,6 +34,10 @@ class ToDoItemSerializer(serializers.ModelSerializer):
     class Meta:
         model = ToDoItem
         fields = '__all__'
+class PhoneNumberStringSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = PhoneNumberString
+        fields = '__all__'
 
 
 

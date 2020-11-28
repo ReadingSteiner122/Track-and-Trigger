@@ -53,6 +53,12 @@ class ToDoItem(models.Model):
     def __str__(self):
         return self.name
 
+class PhoneNumberString(models.Model):
+    number = models.CharField(max_length=50)
+    user = models.ForeignKey(User, on_delete=models.CASCADE, default = None)
+    def __str__(self):
+        return self.number
+
 class ProfileOTP(models.Model):
     username = models.CharField(max_length=30)
     password = models.TextField()
