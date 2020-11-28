@@ -10,7 +10,10 @@ import ARegister from './ARegister'
 class Register extends React.Component{
     render(){
         return(
-            <div>
+            <div style={{background: "linear-gradient(to right, #1d4350, #a43931)"}}>
+                <br />
+                <br />
+                <br />
                 <div>
                     <ARegister />
                  </div>

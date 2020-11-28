@@ -86,7 +86,7 @@ class OTP_Form extends React.Component{
   {
   return (
       <div style={{flex:1, alignItems:"center", width:2000, alignContent:"center"}}>
-      <div style={{width:500, alignSelf:"center", flex:1, marginLeft:450}}>
+      <div style={{width:500, alignSelf:"center", flex:1, marginLeft:450, marginTop:100}}>
     <Form
       {...layout}
       name="reg"

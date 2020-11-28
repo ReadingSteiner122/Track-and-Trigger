@@ -9,7 +9,7 @@ class Files extends React.Component{
     render(){
         return(
             <Layout>
-            <div className="content">
+            <div style={{backgroundImage : "-webkit-linear-gradient(to right, #5D26C1, #a17fe0, #59C173)"}}>
                     <AFile />
             </div>
             </Layout>

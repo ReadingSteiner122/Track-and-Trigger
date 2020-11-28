@@ -103,25 +103,20 @@ class Alogin extends React.Component {
         </Button>
       </Form.Item>
     </Form>
-    <div style={{marginLeft:450}} onClick={() => this.props.history.push("/forgot1")}>
+{/*     <div style={{marginLeft:450}} onClick={() => this.props.history.push("/forgot1")}>
     <Button type="primary">
           Forgot Password
         </Button>
-    </div>
-    <br></br>
-    <br></br>
-    <br></br>
-    <br></br>
-    <div style={{marginRight:600,  width:600, justifyContent:"space-evenly", marginLeft:40}}>
-    <Button type="primary" style={{marginRight:50}}>
-          Sign Up with Google
-        </Button>
-        <Button type="primary" onClick={()=>this.props.history.push("/register")} style={{marginRight:50}}>
+    </div> */}
+ 
+
+ 
+    <div style={{marginRight:500,  width:600, justifyContent:"space-evenly", marginLeft:40}}>
+ 
+        <Button type="primary" onClick={()=>this.props.history.push("/register") } style={{marginBottom:300}}>
           Register
         </Button>
-    <Button type="primary">
-          Sign Up with Facebook
-        </Button>
+
     </div>
     </div>
     </div>

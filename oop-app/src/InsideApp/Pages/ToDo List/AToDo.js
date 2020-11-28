@@ -113,7 +113,7 @@ class AToDo extends React.Component {
       {
         title:'User',
         dataIndex: 'user',
-        editable:true,
+        editable:false,
       },
       {
         title: 'operation',

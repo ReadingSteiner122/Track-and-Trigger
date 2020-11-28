@@ -10,8 +10,12 @@ import Alogin from './Alogin'
 class Login extends React.Component{
     render(){
         return(
-            <div>
+            <div style={{background: "linear-gradient(to right, #1d4350, #a43931)"}}>
                 <div className="h" >
+                    <br />
+                    <br />
+                    <br />
+                    <br />
                     <LogoName/>
                     </div>
                     <div >

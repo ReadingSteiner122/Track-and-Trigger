@@ -152,7 +152,7 @@ class ARegister extends React.Component{
       </Form.Item>
 
       <Form.Item {...tailLayout}>
-        <Button type="primary" htmlType="submit">
+        <Button type="primary" htmlType="submit" style={{marginBottom:200}}>
           Submit
         </Button>
       </Form.Item>
