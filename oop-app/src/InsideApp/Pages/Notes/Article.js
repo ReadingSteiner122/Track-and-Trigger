@@ -30,9 +30,8 @@ const IconText = ({ icon, text }) => (
   </Space>
 );
 
-function mapStateToProps({ auth }) {
-  console.log(auth)
-  return { auth };
+function mapStateToProps( auth ) {
+  return  auth ;
 }
 
 
@@ -42,33 +41,31 @@ class Article extends React.Component
   constructor(props)
   {
     super(props);
-    this.state={listData:[]}
+    this.state={listData:[],
+    user:null
+    }
   }
-  componentDidUpdate()
-  {
-    axios.get("http://localhost:8000/api/diary/")
-  .then(res=>{
-    
-    this.setState({listData:res.data})
-});
-  }
- componentDidMount() {
-  axios.get('http://127.0.0.1:8000/api/auth/user',{
+  
+ async componentDidMount() {
+  await axios.get('http://127.0.0.1:8000/api/auth/user',{
     headers:{
-        'Authorization': 'Token '+this.props.auth.user
+        'Authorization': 'Token '+this.props.token
     }
       })
       .then(res=>{
         console.log(res.data)
         this.setState({user:res.data})
       })
-  axios.get("http://localhost:8000/api/diary/")
+    await axios.get("http://localhost:8000/api/diary/")
   .then(res=>{
     console.log(res.data);
     for(var i=0;i<res.data.length;i++)
     {
-    if(this.state.user.id==res.data[i].user)
+    if(this.state.user.id===res.data[i].user)
+    {
+      console.log(res.data[i])
       this.setState({listData:[...this.state.listData, res.data[i]]})
+    }
     }
 });
  }

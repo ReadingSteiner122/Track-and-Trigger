@@ -27,16 +27,6 @@ class AFile extends React.Component
     }
     
     componentDidMount(){
-        console.log(this.props.auth.user)
-        axios.get('http://127.0.0.1:8000/api/auth/user',{
-            headers:{
-                'Authorization': 'Token '+this.props.auth.user
-            }
-        })
-        .then(res=>{
-            console.log(res.data)
-            this.setState({user:res.data})
-        })
         axios.get('http://127.0.0.1:8000/api/image_object/')
         .then(res=>{
             console.log(res.data);

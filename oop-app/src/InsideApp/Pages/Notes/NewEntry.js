@@ -5,6 +5,7 @@ import { Link,Route,Switch,Redirect, useHistory } from 'react-router-dom';
 import axios from 'axios';
 import { render } from 'react-dom';
 import {withRouter} from 'react-router-dom'
+import {connect} from 'react-redux'
 
 const { TextArea } = Input;
 const layout = {
@@ -22,12 +23,31 @@ const tailLayout = {
   },
 };
 
+function mapStateToProps( auth ) {
+  return  auth ;
+}
+
 class NewEntry extends React.Component
 {
   constructor(props)
   {
     super(props);
+    this.state={
+      user:null
+    }
   }
+
+  async componentDidMount() {
+    await axios.get('http://127.0.0.1:8000/api/auth/user',{
+      headers:{
+          'Authorization': 'Token '+this.props.token
+      }
+        })
+        .then(res=>{
+          console.log(res.data)
+          this.setState({user:res.data})
+        })
+   }
    
    onFinish = (values) => {
     const data={
@@ -35,7 +55,7 @@ class NewEntry extends React.Component
       description:values.entry,
       slug:'i-love-shaurya',
       d_date:values.date,
-      user:15
+      user:this.state.user.id
     }
     axios.post('http://localhost:8000/api/diary/',data,{
       headers: {
@@ -125,4 +145,4 @@ render(){
       }
 };
 
-export default withRouter(NewEntry);
+export default connect(mapStateToProps)(withRouter(NewEntry));

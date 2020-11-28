@@ -2,6 +2,7 @@ import React, { useContext, useState, useEffect, useRef } from 'react';
 import { Table, Input, Button, Popconfirm, Form } from 'antd';
 import 'antd/dist/antd.css';
 import axios from 'axios';
+import {connect} from 'react-redux'
 
 const EditableContext = React.createContext();
 
@@ -85,6 +86,10 @@ const EditableCell = ({
   return <td {...restProps}>{childNode}</td>;
 };
 
+function mapStateToProps( auth ) {
+  return  auth ;
+}
+
 class AInventory extends React.Component {
   constructor(props) {
     super(props);
@@ -108,7 +113,7 @@ class AInventory extends React.Component {
       {
         title:'User',
         dataIndex: 'user',
-        editable:true,
+        editable:false,
       },
       {
         title: 'operation',
@@ -125,16 +130,27 @@ class AInventory extends React.Component {
       dataSource: [],
       count: 0,
       key:0,
-      newData:[]
+      newData:[],
+      user:null
     };
   }
-  componentDidMount(){
+  async componentDidMount(){
+    await axios.get('http://127.0.0.1:8000/api/auth/user',{
+    headers:{
+        'Authorization': 'Token '+this.props.token
+    }
+      })
+      .then(res=>{
+        console.log(res.data)
+        this.setState({user:res.data})
+      })
     axios.get('http://localhost:8000/api/inventory_object/')
     .then(res=>{
       var arr=[];
       for(var i=0;i<res.data.length;i++)
       {
-        arr.push({key:i+1,name:res.data[i].name,quantity:res.data[i].quantity,description:res.data[i].description,user:res.data[i].user})
+        if(this.state.user.id===res.data[i].user)
+          arr.push({key:i+1,name:res.data[i].name,quantity:res.data[i].quantity,description:res.data[i].description,user:res.data[i].user})
       }
       console.log(arr);
       this.setState({
@@ -168,7 +184,7 @@ class AInventory extends React.Component {
       name: "Add object",
       quantity: 0,
       description: 'Click to add Description',
-      user:7,
+      user:this.state.user.id,
      
     };
     this.setState({
@@ -262,4 +278,4 @@ class AInventory extends React.Component {
   }
 }
 
-export default AInventory
+export default connect(mapStateToProps)(AInventory)
