@@ -2,6 +2,7 @@ import React, { useContext, useState, useEffect, useRef } from 'react';
 import { Table, Input, Button, Popconfirm, Form } from 'antd';
 import 'antd/dist/antd.css';
 import axios from 'axios';
+import {connect} from 'react-redux'
 
 const EditableContext = React.createContext();
 
@@ -85,6 +86,10 @@ const EditableCell = ({
   return <td {...restProps}>{childNode}</td>;
 };
 
+function mapStateToProps( auth ) {
+  return  auth ;
+}
+
 class AToDo extends React.Component {
   constructor(props) {
     super(props);
@@ -126,15 +131,26 @@ class AToDo extends React.Component {
       dataSource: [],
       count: 0,
       newData:[],
+      user:null
     };
   }
-  componentDidMount(){
+  async componentDidMount(){
+    await axios.get('http://127.0.0.1:8000/api/auth/user',{
+    headers:{
+        'Authorization': 'Token '+this.props.token
+    }
+      })
+      .then(res=>{
+        console.log(res.data)
+        this.setState({user:res.data})
+      })
     axios.get('http://127.0.0.1:8000/api/todoitem/')
     .then(res=>{
       var arr=[];
       for(var i=0;i<res.data.length;i++)
       {
-        arr.push({key:i+1,name:res.data[i].name,date:res.data[i].date,description:res.data[i].description,user:res.data[i].user})
+        if(this.state.user.id===res.data[i].user)
+          arr.push({key:i+1,name:res.data[i].name,date:res.data[i].date,description:res.data[i].description,user:res.data[i].user})
       }
       console.log(arr);
       this.setState({
@@ -169,7 +185,7 @@ class AToDo extends React.Component {
       name: "Add ToDo item",
       date: '2020-11-29',
       description: `Click to add Description`,
-      user:7
+      user:this.state.user.id
     };
     this.setState({
       dataSource: [...dataSource, newData],
@@ -258,4 +274,4 @@ class AToDo extends React.Component {
   }
 }
 
-export default AToDo
+export default connect(mapStateToProps)(AToDo)  
